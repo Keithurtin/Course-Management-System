@@ -30,12 +30,14 @@ struct Student
 	string gender;
 	Date dateOfBirth;
 	string socialID;
+	Course* courseListevenStudent;
 	Student* pNext;
 };
 
 struct Course {
 	string courseID;
 	string courseName;
+	string className;
 	string teacherName;
 	int credits;
 	int maxStudents;

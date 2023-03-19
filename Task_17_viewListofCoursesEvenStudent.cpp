@@ -24,7 +24,7 @@ void viewListOfCoursesEvenStudent(Student* pHead, string studentID)
         << "| " << setw(11) << left << "Session" << " |" << endl;
     cout << "-----------------------------------------------------------------------------------------------------------------------------------------------------------" << endl;
 
-    Course* curCourse = curStudent->courseList;
+    Course* curCourse = curStudent->courseListevenStudent;
     while (curCourse != nullptr) {
         cout << "| " << setw(12) << left << curCourse->courseID
             << "| " << setw(35) << left << curCourse->courseName
