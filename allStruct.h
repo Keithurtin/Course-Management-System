@@ -32,7 +32,7 @@ struct Course {
     string dayOfWeek;
     string session;
     Course* pNext;
-    Student Studs[];
+    Student* Studs;
 };
 
 struct Date
