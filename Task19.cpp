@@ -1,4 +1,5 @@
 #include "header.h"
+#include "allStruct.h";
 
 void ExportListOfStudsInACourse(ofstream& ListOfStuds, Course Cour){
     ListOfStuds.open("ListOfStudents.csv");

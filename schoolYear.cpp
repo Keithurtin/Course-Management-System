@@ -1,5 +1,6 @@
 #include <iostream>
 #include "schoolYear.h"
+#include "allStruct.h";
 
 using namespace std;
 
