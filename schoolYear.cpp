@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void createSchoolYear(SchoolYear* &pHead)
+void createSchoolYear(SchoolYear*& pHead)
 {
 	cin >> pHead->startYear >> pHead->endYear;
 	pHead->classroom = new Class;

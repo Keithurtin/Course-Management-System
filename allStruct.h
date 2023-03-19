@@ -1,4 +1,4 @@
-#pragma once;
+#pragma once
 
 #include <iostream>
 #include <string>
@@ -11,28 +11,6 @@ struct Time {
 	unsigned short day, month, year;
 	unsigned short hours, minutes, secconds;
 
-};
-
-struct Semester {
-
-	unsigned short semester_num;
-	Time school_year, start_date, end_date;
-
-	Course* p_CourseList = nullptr;
-
-	Semester* p_Next_Semester = nullptr;
-};
-
-struct Course {
-    string courseID;
-    string courseName;
-    string teacherName;
-    int credits;
-    int maxStudents;
-    string dayOfWeek;
-    string session;
-    Course* pNext;
-    Student* Studs;
 };
 
 struct Date
@@ -48,13 +26,33 @@ struct Student
 	string studentID;
 	string firstName;
 	string lastName;
-    string fullname = lastName + " " + firstName;
+	string fullname = lastName + " " + firstName;
 	string gender;
 	Date dateOfBirth;
 	string socialID;
-	int totalMark, finalMark, midtermMark, otherMark;
-	Course* courseList;
 	Student* pNext;
+};
+
+struct Course {
+	string courseID;
+	string courseName;
+	string teacherName;
+	int credits;
+	int maxStudents;
+	string dayOfWeek;
+	string session;
+	Course* pNext;
+	Student* Studs;
+};
+
+struct Semester {
+
+	unsigned short semester_num;
+	Time school_year, start_date, end_date;
+
+	Course* p_CourseList = nullptr;
+
+	Semester* p_Next_Semester = nullptr;
 };
 
 struct Class
@@ -70,4 +68,11 @@ struct SchoolYear
 	int endYear;
 	Class* classroom;
 	Course* courseList;
+};
+
+struct Account
+{
+	string username;
+	string password;
+	Account* pNext;
 };
