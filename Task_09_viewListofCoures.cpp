@@ -1,4 +1,6 @@
 #include"Part_2.h"
+#include "allStruct.h";
+
 void viewListOfCourses(SchoolYear* pHead)
 {
     if (pHead == nullptr)
