@@ -1,12 +1,18 @@
 #include "allStruct.h"
-
-void viewListOfCourses(SchoolYear* pHead)
+void viewListOfCoursesEvenStudent(Student* pHead, string studentID)
 {
-    if (pHead == nullptr)
-    {
-        cout << "School year is empty." << endl;
+
+    Student* curStudent = pHead;
+    while (curStudent != nullptr && curStudent->studentID != studentID) {
+        curStudent = curStudent->pNext;
+    }
+    if (curStudent == nullptr) {
+        cout << "Student not found." << endl;
         return;
     }
+
+    cout << "List of courses for student with ID " << studentID << ":" << endl;
+    cout<<"Full Name: "<<curStudent->fullname<< endl;
     cout << "-----------------------------------------------------------------------------------------------------------------------------------------------------------" << endl;
     cout << "| " << setw(12) << left << "Course ID"
         << "| " << setw(35) << left << "Course Name"
@@ -18,9 +24,8 @@ void viewListOfCourses(SchoolYear* pHead)
         << "| " << setw(11) << left << "Session" << " |" << endl;
     cout << "-----------------------------------------------------------------------------------------------------------------------------------------------------------" << endl;
 
-    Course* curCourse = pHead->courseList;
-    while (curCourse != nullptr)
-    {
+    Course* curCourse = curStudent->courseList;
+    while (curCourse != nullptr) {
         cout << "| " << setw(12) << left << curCourse->courseID
             << "| " << setw(35) << left << curCourse->courseName
             << "| " << setw(20) << left << curCourse->className

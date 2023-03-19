@@ -53,6 +53,7 @@ struct Student
 	Date dateOfBirth;
 	string socialID;
 	int totalMark, finalMark, midtermMark, otherMark;
+	Course* courseList;
 	Student* pNext;
 };
 
