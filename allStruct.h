@@ -68,4 +68,5 @@ struct SchoolYear
 	int startYear;
 	int endYear;
 	Class* classroom;
+	Course* courseList;
 };
