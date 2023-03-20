@@ -1,5 +1,5 @@
 #include "allStruct.h"
-void viewListOfCoursesEvenStudent(Student* pHead, string studentID)
+void viewListOfCoursesEvenStudent(Student* pHead, string studentID, Course* cHead)
 {
 
     Student* curStudent = pHead;
@@ -24,8 +24,14 @@ void viewListOfCoursesEvenStudent(Student* pHead, string studentID)
         << "| " << setw(11) << left << "Session" << " |" << endl;
     cout << "-----------------------------------------------------------------------------------------------------------------------------------------------------------" << endl;
 
-    Course* curCourse = curStudent->courseListevenStudent;
-    while (curCourse != nullptr) {
+    Course* curCourse = cHead;
+    while (curCourse != nullptr)
+    {
+        Student* curStudentInCourse = curCourse->Studs;
+        while (curStudentInCourse != nullptr)
+        {
+            if (curStudentInCourse->studentID == studentID)
+            {
         cout << "| " << setw(12) << left << curCourse->courseID
             << "| " << setw(35) << left << curCourse->courseName
             << "| " << setw(20) << left << curCourse->className
@@ -35,6 +41,9 @@ void viewListOfCoursesEvenStudent(Student* pHead, string studentID)
             << "| " << setw(15) << left << curCourse->dayOfWeek
             << "| " << setw(11) << left << curCourse->session << " |" << endl;
         cout << "-----------------------------------------------------------------------------------------------------------------------------------------------------------" << endl;
+            }
+            curStudentInCourse = curStudentInCourse->pNext;
+        }
         curCourse = curCourse->pNext;
     }
 }
