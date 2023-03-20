@@ -27,6 +27,7 @@ struct Student
 	string firstName;
 	string lastName;
 	string fullname = lastName + " " + firstName;
+	int totalMark, finalMark, midtermMark, otherMark;
 	string gender;
 	Date dateOfBirth;
 	string socialID;
@@ -42,8 +43,8 @@ struct Course {
 	int maxStudents;
 	string dayOfWeek;
 	string session;
-	Course* pNext;
-	Student* Studs;
+	Course* pNext = nullptr;
+	Student* Studs = nullptr;
 };
 
 struct Semester {
