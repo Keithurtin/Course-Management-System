@@ -34,19 +34,20 @@ Account* findTail(Account* pHead)
 	return pHead;
 }
 
-bool checkAccountExistence(Account* pHead, string username)
+Account* takeAccount(Account* pHead, string username)
 {
 	while (pHead != nullptr)
 	{
-		if (pHead->username == username) return true;
+		if (pHead->username == username) return pHead;
 		pHead = pHead->pNext;
 	}
-	return false;
+	return nullptr;
 }
 
 void addAccount(Account*& pHead, string username, string password)
 {
-	if (checkAccountExistence(pHead, username))
+	Account* temp = takeAccount(pHead, username);
+	if (temp)
 	{
 		cout << "Account already exists";
 		return;
@@ -63,4 +64,12 @@ void addAccount(Account*& pHead, string username, string password)
 	newAcc->pNext = nullptr;
 
 	fout.close();
+}
+
+bool checkAccount(Account* pHead, string username, string password)
+{
+	Account* temp = takeAccount(pHead, username);
+	if (!temp) return false;
+	if (temp->password != password) return false;
+	return true;
 }
