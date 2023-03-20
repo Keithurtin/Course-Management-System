@@ -30,7 +30,6 @@ struct Student
 	string gender;
 	Date dateOfBirth;
 	string socialID;
-	Course* courseListevenStudent;
 	Student* pNext;
 };
 
