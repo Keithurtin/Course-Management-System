@@ -2,10 +2,11 @@
 #include <string>
 #include <fstream>
 #include "allStruct.h"
+#include "account.h"
 
 using namespace std;
 
-void readAccount(Account*& pHead)
+void ListAccount::read()
 {
 	ifstream fin("Data/account.txt");
 
@@ -16,7 +17,7 @@ void readAccount(Account*& pHead)
 		getline(fin, cur->username);
 		getline(fin, cur->password);
 
-		//cout << cur->username << endl << cur->password;
+		cout << cur->username << endl << cur->password << endl;
 		if (fin.eof())
 		{
 			cur->pNext = nullptr;
@@ -44,7 +45,7 @@ Account* takeAccount(Account* pHead, string username)
 	return nullptr;
 }
 
-void addAccount(Account*& pHead, string username, string password)
+void ListAccount::add(string username, string password)
 {
 	Account* temp = takeAccount(pHead, username);
 	if (temp)
@@ -66,7 +67,7 @@ void addAccount(Account*& pHead, string username, string password)
 	fout.close();
 }
 
-bool checkAccount(Account* pHead, string username, string password)
+bool ListAccount::check(string username, string password)
 {
 	Account* temp = takeAccount(pHead, username);
 	if (!temp) return false;
