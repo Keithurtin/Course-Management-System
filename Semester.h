@@ -1,6 +1,6 @@
 #include<string>
 #include<iostream>
-
+//
 #ifndef SEMESTER_H
 #define SEMESTER_H
 
@@ -40,5 +40,10 @@ void add_Course(Course*& p_Course);
 void set_Course_Data(Course*& p_Course);
 void get_Course_Data(Course*& p_Course);
 void delete_All_Course(Course*& p_Course);
+
+//student prototype
+void get_Student_Data_From_File(std::string student_list);
+void add_Student_To_Course(Student*& p_Student_list, Student& new_Student);
+void delete_All_Student(Student*& p_Student_List);
 #endif 
 

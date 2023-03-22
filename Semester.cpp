@@ -198,3 +198,95 @@ void delete_All_Course(Course*& p_Course)
 	}
 }
 
+//student function
+void get_Student_Data_From_File(std::string student_list, Student*& p_Student_list )
+{
+	std::ifstream In_Student_List;
+	In_Student_List.open(student_list);
+	if (!In_Student_List.is_open())
+	{
+		std::cout << "Unable to open " << student_list <<" file \n";
+	}
+
+	unsigned int number_of_students = 0;
+
+	while (!In_Student_List.eof())
+	{
+		std::string s = "";
+		std::getline(In_Student_List, s);
+		number_of_students++;
+	}
+	In_Student_List.close();
+
+	number_of_students -= 1;
+	Student* student_number = new Student[number_of_students];
+	
+	In_Student_List.open(student_list);
+	if (!In_Student_List.is_open())
+	{
+		std::cout << "Unable to open " << student_list << " file \n";
+	}
+
+	unsigned int j = 0;
+	std::string s = "";
+	std::getline(In_Student_List,s );
+	while (!In_Student_List.eof() && j < number_of_students)
+	{		
+			getline(In_Student_List , s,',');
+			student_number[j].No = stoi(s);
+			s = "";
+			std::cout << student_number[j].No << "\n";
+			getline(In_Student_List, student_number[j].studentID,',');
+			std::cout << student_number[j].studentID << "\n";
+			getline(In_Student_List, student_number[j].firstName, ',');
+			std::cout << student_number[j].firstName << "\n";
+			getline(In_Student_List, student_number[j].lastName, ',');
+			std::cout << student_number[j].lastName << "\n";
+			getline(In_Student_List, student_number[j].gender, ',');
+			std::cout << student_number[j].gender << "\n";
+			getline(In_Student_List, s, ' ');
+			student_number[j].dateOfBirth.day = stoi(s);
+			s = "";
+			std::cout << student_number[j].dateOfBirth.day << "\n";
+			getline(In_Student_List, s, ' ');
+			student_number[j].dateOfBirth.month = stoi(s);
+			s = "";
+			std::cout << student_number[j].dateOfBirth.month << "\n";
+			getline(In_Student_List, s, ',');
+			student_number[j].dateOfBirth.year = stoi(s);
+			s = "";
+			std::cout << student_number[j].dateOfBirth.year << "\n";
+			getline(In_Student_List, student_number[j].socialID);
+			std::cout << student_number[j].socialID << "\n";
+			j++;
+
+		
+	}
+	In_Student_List.close();
+
+	for (unsigned int i = 0; i < number_of_students; i++)
+	{
+		add_Student_To_Course(p_Student_list, student_number[i]);
+	}
+
+	delete[] student_number;
+}
+
+void get_Student_Data(Student*& p_Student_list)
+{
+	while (p_Student_list != nullptr)
+	{
+		std::cout << " Student no: " << p_Student_list->No << "\n";
+		std::cout << " Student ID: " << p_Student_list->studentID << "\n";
+		std::cout << " Student First name: " << p_Student_list->firstName << "\n";
+		std::cout << " Student Last name: " << p_Student_list->lastName << "\n";
+		std::cout << " Student Gender: " << p_Student_list->gender << "\n";
+		std::cout << " Student date of birth: " << p_Student_list->dateOfBirth.day;
+		std::cout << " " << p_Student_list->dateOfBirth.month;
+		std::cout << " " << p_Student_list->dateOfBirth.year << "\n";
+		std::cout << " Student Social ID: " << p_Student_list->socialID << "\n";
+		p_Student_list = p_Student_list->pNext;
+
+	}
+
+}
