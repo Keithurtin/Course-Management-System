@@ -74,3 +74,24 @@ bool ListAccount::check(string username, string password)
 	if (temp->password != password) return false;
 	return true;
 }
+
+void ListAccount::update()
+{
+	ofstream fout("Data/account.txt");
+	Account* cur = pHead;
+	
+	while(cur != nullptr)
+	{
+		fout << cur->username << endl << cur->password;
+		if (cur->pNext) fout << endl;
+		cur = cur->pNext;
+	}
+
+	fout.close();
+}
+
+void ListAccount::changePass(string username, string password)
+{
+	Account* temp = takeAccount(pHead, username);
+	temp->password = password;
+}
