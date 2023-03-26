@@ -1,7 +1,7 @@
 #include "allStruct.h"
-void viewListOfCoursesEvenStudent(Student* pHead, string studentID, Course* cHead)
-{
 
+void viewListOfCoursesEvenStudent(Student* pHead, string studentID, Course* cHead, Semester* pCurrentSemester)
+{
     Student* curStudent = pHead;
     while (curStudent != nullptr && curStudent->studentID != studentID) {
         curStudent = curStudent->pNext;
@@ -11,8 +11,8 @@ void viewListOfCoursesEvenStudent(Student* pHead, string studentID, Course* cHea
         return;
     }
 
-    cout << "List of courses for student with ID " << studentID << ":" << endl;
-    cout<<"Full Name: "<<curStudent->fullname<< endl;
+    cout << "List of courses for student with ID " << studentID << " in semester " << pCurrentSemester->semester_num << " - School year: " << pCurrentSemester->school_year.year << " - " << pCurrentSemester->school_year.year + 1 << ":" << endl;
+    cout<<"Full Name: "<<curStudent->studentName<< endl;
     cout << "-----------------------------------------------------------------------------------------------------------------------------------------------------------" << endl;
     cout << "| " << setw(12) << left << "Course ID"
         << "| " << setw(35) << left << "Course Name"
@@ -24,7 +24,7 @@ void viewListOfCoursesEvenStudent(Student* pHead, string studentID, Course* cHea
         << "| " << setw(11) << left << "Session" << " |" << endl;
     cout << "-----------------------------------------------------------------------------------------------------------------------------------------------------------" << endl;
 
-    Course* curCourse = cHead;
+    Course* curCourse = pCurrentSemester->p_CourseList;
     while (curCourse != nullptr)
     {
         Student* curStudentInCourse = curCourse->Studs;
@@ -32,18 +32,19 @@ void viewListOfCoursesEvenStudent(Student* pHead, string studentID, Course* cHea
         {
             if (curStudentInCourse->studentID == studentID)
             {
-        cout << "| " << setw(12) << left << curCourse->courseID
-            << "| " << setw(35) << left << curCourse->courseName
-            << "| " << setw(20) << left << curCourse->className
-            << "| " << setw(25) << left << curCourse->teacherName
-            << "| " << setw(7) << left << curCourse->credits
-            << "| " << setw(12) << left << curCourse->maxStudents
-            << "| " << setw(15) << left << curCourse->dayOfWeek
-            << "| " << setw(11) << left << curCourse->session << " |" << endl;
-        cout << "-----------------------------------------------------------------------------------------------------------------------------------------------------------" << endl;
+                cout << "| " << setw(12) << left << curCourse->courseID
+                    << "| " << setw(35) << left << curCourse->courseName
+                    << "| " << setw(20) << left << curCourse->className
+                    << "| " << setw(25) << left << curCourse->teacherName
+                    << "| " << setw(7) << left << curCourse->credits
+                    << "| " << setw(12) << left << curCourse->maxStudents
+                    << "| " << setw(15) << left << curCourse->dayOfWeek
+                    << "| " << setw(11) << left << curCourse->session << " |" << endl;
+                cout << "-----------------------------------------------------------------------------------------------------------------------------------------------------------" << endl;
             }
             curStudentInCourse = curStudentInCourse->pNext;
         }
         curCourse = curCourse->pNext;
     }
 }
+
