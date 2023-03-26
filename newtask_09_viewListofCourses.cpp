@@ -1,12 +1,14 @@
 #include "allStruct.h"
 
-void viewListOfCourses(SchoolYear* pHead)
+void viewListOfCourses(Semester* pCurrentSemester)
 {
-    if (pHead == nullptr)
+    if (pCurrentSemester == nullptr)
     {
-        cout << "School year is empty." << endl;
+        cout << "No current semester found." << endl;
         return;
     }
+
+    cout << "List of courses in semester " << pCurrentSemester->semester_num << " - School year: " << pCurrentSemester->school_year.year << " - " << pCurrentSemester->school_year.year + 1 << endl;
     cout << "-----------------------------------------------------------------------------------------------------------------------------------------------------------" << endl;
     cout << "| " << setw(12) << left << "Course ID"
         << "| " << setw(35) << left << "Course Name"
@@ -18,7 +20,7 @@ void viewListOfCourses(SchoolYear* pHead)
         << "| " << setw(11) << left << "Session" << " |" << endl;
     cout << "-----------------------------------------------------------------------------------------------------------------------------------------------------------" << endl;
 
-    Course* curCourse = pHead->courseList;
+    Course* curCourse = pCurrentSemester->p_CourseList;
     while (curCourse != nullptr)
     {
         cout << "| " << setw(12) << left << curCourse->courseID
