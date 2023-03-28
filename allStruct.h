@@ -26,7 +26,7 @@ struct Student
 	string studentID;
 	string firstName;
 	string lastName;
-	string fullname;
+	string fullname = firstName + " " + lastName;
 	string gender;
 	Date dateOfBirth;
 	string socialID;
