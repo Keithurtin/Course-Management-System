@@ -76,5 +76,6 @@ struct Account
 {
 	string username;
 	string password;
+	string role;
 	Account* pNext;
 };

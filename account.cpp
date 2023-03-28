@@ -6,7 +6,7 @@
 
 using namespace std;
 
-void ListAccount::read()
+void readAccount(Account* &pHead)
 {
 	ifstream fin("Data/account.txt");
 
@@ -16,8 +16,9 @@ void ListAccount::read()
 	{
 		getline(fin, cur->username);
 		getline(fin, cur->password);
+		getline(fin, cur->role);
 
-		cout << cur->username << endl << cur->password << endl;
+		//cout << cur->username << endl << cur->password << endl << cur->role << endl;
 		if (fin.eof())
 		{
 			cur->pNext = nullptr;
@@ -35,19 +36,19 @@ Account* findTail(Account* pHead)
 	return pHead;
 }
 
-Account* takeAccount(Account* pHead, string username)
+Account* takeAccount(Account* pHead, string username, string password)
 {
 	while (pHead != nullptr)
 	{
-		if (pHead->username == username) return pHead;
+		if (pHead->username == username && pHead->password == password) return pHead;
 		pHead = pHead->pNext;
 	}
 	return nullptr;
 }
 
-void ListAccount::add(string username, string password)
+void addAccount(Account* &pHead, string username, string password, string role)
 {
-	Account* temp = takeAccount(pHead, username);
+	Account* temp = takeAccount(pHead, username, password);
 	if (temp)
 	{
 		cout << "Account already exists";
@@ -55,34 +56,27 @@ void ListAccount::add(string username, string password)
 	}
 
 	ofstream fout("Data/account.txt", ios::app);
-	fout << endl << username << endl << password;
+	fout << endl << username << endl << password << endl << role;
 
 	Account* newAcc = findTail(pHead);
 	newAcc->pNext = new Account;
 	newAcc = newAcc->pNext;
 	newAcc->username = username;
 	newAcc->password = password;
+	newAcc->role = role;
 	newAcc->pNext = nullptr;
 
 	fout.close();
 }
 
-bool ListAccount::check(string username, string password)
-{
-	Account* temp = takeAccount(pHead, username);
-	if (!temp) return false;
-	if (temp->password != password) return false;
-	return true;
-}
-
-void ListAccount::update()
+void update(Account* &pHead)
 {
 	ofstream fout("Data/account.txt");
 	Account* cur = pHead;
 	
 	while(cur != nullptr)
 	{
-		fout << cur->username << endl << cur->password;
+		fout << cur->username << endl << cur->password << endl << cur->role;
 		if (cur->pNext) fout << endl;
 		cur = cur->pNext;
 	}
@@ -90,8 +84,9 @@ void ListAccount::update()
 	fout.close();
 }
 
-void ListAccount::changePass(string username, string password)
+void changePass(Account* &pHead, string username, string password)
 {
-	Account* temp = takeAccount(pHead, username);
-	temp->password = password;
+	Account* temp = takeAccount(pHead, username, password);
+	if (temp) 
+		temp->password = password;
 }

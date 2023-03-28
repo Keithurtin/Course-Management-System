@@ -1,15 +1,13 @@
 #pragma once
-
 #include "allStruct.h"
+#include <string>
+#include <iostream>
 
-struct ListAccount
-{
-	Account* pHead = new Account;
+using namespace std;
 
-	void read();
-	//Account* take(string username);
-	void add(string username, string password);
-	bool check(string username, string password);
-	void changePass(string username, string password);
-	void update();
-};
+void readAccount(Account*& pHead);
+Account* findTail(Account* pHead);
+Account* takeAccount(Account* pHead, string username, string password);
+void addAccount(Account* &pHead, string username, string password, string role);
+void update(Account* &pHead);
+void changePass(Account* &pHead, string username, string password);
