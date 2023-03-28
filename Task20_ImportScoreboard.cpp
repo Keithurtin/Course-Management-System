@@ -1,39 +1,62 @@
 #include "allStruct.h"
 #include "ImportScoreboard.h"
 
-void Input_ScoreboardOfCourse_FromFile(ifstream& Scoreboard, Course& Cour){
+void Input_ScoreboardOfCourse_FromFile(ifstream& Scoreboard, Course*& Cour){
     Scoreboard.open("Scoreboard.csv");
     if(Scoreboard.is_open() == false){
         cout << "Can not open input file. \n";
         return;
     }
-
-    int i = 0;
+    unsigned int count = 0;
     while (!Scoreboard.eof())
     {
         string f = "";
         getline(Scoreboard, f);
-        i++;
+        count++;
     }
     Scoreboard.close();
 
     Scoreboard.open("Scoreboard.csv");
-    Cour.maxStudents = i;
-    Cour.Studs = new Student[Cour.maxStudents];
-    i = 0;
-    while(!Scoreboard.eof()){
-        Scoreboard  >> Cour.Studs[i].No;
-        Scoreboard.ignore();
-        getline(Scoreboard, Cour.Studs[i].studentID);
-        Scoreboard.ignore();
-        getline(Scoreboard, Cour.Studs[i].fullname);
-        Scoreboard  >> Cour.Studs[i].totalMark
-                    >> Cour.Studs[i].finalMark 
-                    >> Cour.Studs[i].midtermMark 
-                    >> Cour.Studs[i].otherMark;
-        i++;
+    Cour->maxStudents = count;
+    Student* Stu = nullptr, * Head;
+    count = 0;
+    while(!Scoreboard.eof() && count < Cour->maxStudents){
+        if(Stu == nullptr){
+            Stu = new Student;
+            Head = Stu;
+        }
+        else
+        {
+            Stu->pNext = new Student;
+            Stu = Stu->pNext;
+        }
+
+        string tmp;
+
+        getline(Scoreboard, tmp, ',');
+        Stu->No = stoi(tmp);
+
+        getline(Scoreboard, Stu->studentID, ',');
+        getline(Scoreboard, Stu->firstName, ' ');
+        getline(Scoreboard, Stu->lastName, ',');
+
+        Stu->fullname = Stu->lastName + " " + Stu->firstName;
+
+        getline(Scoreboard, tmp, ',');
+        Stu->finalMark = stoi(tmp);
+
+        getline(Scoreboard, tmp, ',');
+        Stu->midtermMark = stoi(tmp);
+
+        getline(Scoreboard, tmp, ',');
+        Stu->otherMark = stoi(tmp);
+
+        getline(Scoreboard, tmp, '\n');
+        Stu->totalMark = stoi(tmp);
+
+        count++;
+        Stu->pNext = nullptr;
     }
+    Cour->Studs = Head;
     Scoreboard.close();
 }
-
-
