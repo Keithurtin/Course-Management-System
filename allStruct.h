@@ -26,11 +26,11 @@ struct Student
 	string studentID;
 	string firstName;
 	string lastName;
-	string fullname = lastName + " " + firstName;
-	int totalMark, finalMark, midtermMark, otherMark;
+	string fullname;
 	string gender;
 	Date dateOfBirth;
 	string socialID;
+	int totalMark, finalMark, midtermMark, otherMark;
 	Student* pNext;
 };
 

@@ -1,20 +1,23 @@
 #include "ListOfStuds.h"
 #include "allStruct.h"
 
-void ExportListOfStudsInACourse(ofstream& ListOfStuds, Course Cour){
+void ExportListOfStudsInACourse(ofstream& ListOfStuds, Course* Cour){
     ListOfStuds.open("ListOfStudents.csv");
     if(ListOfStuds.is_open() == false){
         cout << "Error writing file. \n";
         return;
     }
 
-    ListOfStuds << "Course ID: " << Cour.courseID << endl;
-    ListOfStuds << "Course name: " << Cour.courseName << endl;
-    ListOfStuds << "Teacher's name: " << Cour.teacherName << endl;
-    ListOfStuds << "Student's ID, Gender, Name" << endl;
+    ListOfStuds << "Course ID: " << Cour->courseID << endl;
+    ListOfStuds << "Course name: " << Cour->courseName << endl;
+    ListOfStuds << "Teacher's name: " << Cour->teacherName << endl;
+    ListOfStuds << "Student's ID, Name," << endl;
 
-    for(int i = 0; i < Cour.maxStudents; i++){
-        ListOfStuds << Cour.Studs[i].studentID << "," << Cour.Studs[i].gender << "," << Cour.Studs[i].fullname << endl;
+    Student* Stu = Cour->Studs;
+    int i = 1;
+    while (Stu != nullptr) {
+        ListOfStuds << i++ << "," << Stu->studentID << "," << Stu->firstName << " " << Stu->lastName << endl;
+        Stu = Stu->pNext;
     }
 
     ListOfStuds.close();
