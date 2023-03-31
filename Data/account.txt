@@ -1,2 +1,17 @@
 admin
+abc
+Van A
+Tran
+staff
+Male
+21 12 1990
+123456789
+stud
 123
+Thi B
+Nguyen
+student
+22121234
+Female
+1 4 2004
+987654321
