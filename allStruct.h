@@ -76,6 +76,12 @@ struct Account
 {
 	string username;
 	string password;
+	string firstName;
+	string lastName;
 	string role;
+	string StudentID;
+	string Gender;
+	Date dateOfBirth;
+	string socialID;
 	Account* pNext;
 };
