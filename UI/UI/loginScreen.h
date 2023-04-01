@@ -2,6 +2,7 @@
 #include <msclr/marshal_cppstd.h>
 #include "allStruct.h"
 #include "account.h"
+#include "mainScreen.h"
 
 namespace UI {
 
@@ -17,7 +18,7 @@ namespace UI {
 	/// </summary>
 	public ref class loginScreen : public System::Windows::Forms::Form{
 	public:
-		Account* account = nullptr;
+		Account* accountList;
 		bool login = false;
 		Account* curAccount;
 
@@ -29,9 +30,9 @@ namespace UI {
 			//TODO: Add the constructor code here
 			//
 		}
-		void getData(Account* accountList)
+		void getData(Account* accountList0)
 		{
-			account = accountList;
+			accountList = accountList0;
 		}
 
 	protected:
@@ -130,7 +131,7 @@ namespace UI {
 
 	private: 
 		System::Void loginButton_Click(System::Object^ sender, System::EventArgs^ e) {
-			curAccount = takeAccount(account, convertToString(username->Text), convertToString(password->Text));
+			curAccount = takeAccount(accountList, convertToString(username->Text), convertToString(password->Text));
 			if (curAccount){
 				login = true;
 				Close();
