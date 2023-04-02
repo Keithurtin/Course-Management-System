@@ -44,7 +44,7 @@ void readSchoolYear(SchoolYear*& pHead)
 	fin.close();
 }
 
-SchoolYear* findTail(SchoolYear* pHead)
+SchoolYear* findTailSchoolYear(SchoolYear* pHead)
 {
 	if (!pHead) return pHead;
 	SchoolYear* cur = pHead;
@@ -52,14 +52,28 @@ SchoolYear* findTail(SchoolYear* pHead)
 	return cur;
 }
 
-void addSchoolYear(SchoolYear* &schoolYearList, SchoolYear* curSchoolYear)
+void addSchoolYear(SchoolYear* &schoolYearList, SchoolYear* &curSchoolYear)
 {
-	SchoolYear* temp = findTail(schoolYearList);
+	SchoolYear* temp = findTailSchoolYear(schoolYearList);
 	temp->pNext = curSchoolYear;
 	curSchoolYear->pNext = nullptr;
 }
 
-void update(SchoolYear* pHead)
+void addClass(Class*& classList, Class* &curClass, int &n)
+{
+	if (n == 0) classList = curClass;
+	else
+	{
+		Class* cur = classList;
+		for (int i = 1; i < n; i++)
+			cur = cur->pNext;
+		cur->pNext = curClass;
+	}
+	curClass->pNext = nullptr;
+	n++;
+}
+
+void updateSchoolYear(SchoolYear* pHead)
 {
 	ofstream fout("Data/schoolYear.txt");
 
@@ -98,6 +112,17 @@ void output(SchoolYear* pHead)
 	}
 }
 
+SchoolYear* takeYear(SchoolYear* pHead, int startYear, int endYear)
+{
+	while (pHead)
+	{
+		if (pHead->startYear == startYear && pHead->endYear == endYear)
+			return pHead;
+		pHead = pHead->pNext;
+	}
+	return pHead;
+}
+
 /*int main()
 {
 	SchoolYear* schoolYear = nullptr;
@@ -105,11 +130,11 @@ void output(SchoolYear* pHead)
 	SchoolYear* newYear = new SchoolYear;
 	newYear->startYear = 2023;
 	newYear->endYear = 2024;
-	newYear->numOfClass = 1;
-	newYear->classroom = new Class;
-	newYear->classroom->name = "APCS";
-	newYear->classroom->pNext = nullptr;
+	newYear->numOfClass = 0;
 	addSchoolYear(schoolYear, newYear);
+	Class* curClass = new Class;
+	curClass->name = "23APCS";
+	addClass(newYear->classroom, curClass, newYear->numOfClass);
 	//output(schoolYear);
-	update(schoolYear);
+	//updateSchoolYear(schoolYear);
 }*/

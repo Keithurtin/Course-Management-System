@@ -68,7 +68,7 @@ struct SchoolYear
 {
 	int startYear;
 	int endYear;
-	int numOfClass;
+	int numOfClass = 0;
 	Class* classroom;
 	Semester* semesters;
 	SchoolYear* pNext = nullptr;
