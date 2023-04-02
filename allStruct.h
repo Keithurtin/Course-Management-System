@@ -68,8 +68,10 @@ struct SchoolYear
 {
 	int startYear;
 	int endYear;
+	int numOfClass;
 	Class* classroom;
 	Semester* semesters;
+	SchoolYear* pNext = nullptr;
 };
 
 struct Account
