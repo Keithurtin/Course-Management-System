@@ -1,10 +1,16 @@
 #include "allStruct.h"
 
-void viewListOfCourses(Semester* pCurrentSemester)
+void viewListOfCourses(Semester* pCurrentSemester, int year, int semester)
 {
     if (pCurrentSemester == nullptr)
     {
         cout << "No current semester found." << endl;
+        return;
+    }
+
+    if (pCurrentSemester->school_year.year != year || pCurrentSemester->semester_num != semester)
+    {
+        cout << "No courses found for semester " << semester << " of school year " << year<< "-"<< year + 1 << endl;
         return;
     }
 

@@ -1,7 +1,18 @@
 #include "allStruct.h"
 
-void viewListOfCoursesEvenStudent(Student* pHead, string studentID, Course* cHead, Semester* pCurrentSemester)
+void viewListOfCoursesEvenStudent(Student* pHead, string studentID, Course* cHead, Semester* pCurrentSemester,int semester, int year)
 {
+    if (pCurrentSemester == nullptr)
+    {
+        cout << "No current semester found." << endl;
+        return;
+    }
+
+    if (pCurrentSemester->school_year.year != year || pCurrentSemester->semester_num != semester)
+    {
+        cout << "No courses found for semester " << semester << " of school year " << year<< "-"<< year + 1 << endl;
+        return;
+    }
     Student* curStudent = pHead;
     while (curStudent != nullptr && curStudent->studentID != studentID) {
         curStudent = curStudent->pNext;
@@ -12,7 +23,7 @@ void viewListOfCoursesEvenStudent(Student* pHead, string studentID, Course* cHea
     }
 
     cout << "List of courses for student with ID " << studentID << " in semester " << pCurrentSemester->semester_num << " - School year: " << pCurrentSemester->school_year.year << " - " << pCurrentSemester->school_year.year + 1 << ":" << endl;
-    cout<<"Full Name: "<<curStudent->studentName<< endl;
+    cout<<"Full Name: "<<curStudent->fullname<< endl;
     cout << "-----------------------------------------------------------------------------------------------------------------------------------------------------------" << endl;
     cout << "| " << setw(12) << left << "Course ID"
         << "| " << setw(35) << left << "Course Name"
