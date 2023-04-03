@@ -8,6 +8,44 @@
 
 using namespace std;
 
+void addClassStudentList(StudentList* &sList, string ID, Class* curClass)
+{
+	StudentList* cur;
+	if (!sList)
+	{
+		sList = new StudentList;
+		cur = sList;
+	}
+	else
+	{
+		cur = sList;
+		while (cur->pNext) cur = cur->pNext;
+		cur->pNext = new StudentList;
+		cur = cur->pNext;
+	}
+	cur->ID = ID;
+	cur->course = curCourse;
+	cur->classroom = curClass;
+	cur->pNext = nullptr;
+	
+}
+
+void readStudentList(StudentList* sList, SchoolYear* schoolYear)
+{
+	while (schoolYear)
+	{
+		int nClass = schoolYear->numOfClass;
+		Class* curClass = schoolYear->classroom;
+		for (int i = 0; i < nClass; i++)
+		{
+			int nStudent = curClass->numOfStudent;
+			Student* curStud = curClass->student;
+			for (int j = 0; j < nStudent; j++)
+				addClassStudentList(sList, curStud->studentID, curClass);
+		}
+	}
+}
+
 void readStudent(Student*& studentList, int numOfStudent, ifstream& fin)
 {
 	Student* cur = studentList;
@@ -255,13 +293,4 @@ void output(SchoolYear* pHead)
 		if (pHead->pNext) cout << endl;
 		pHead = pHead->pNext;
 	}
-}
-
-int main()
-{
-	SchoolYear* schoolYear = nullptr;
-	readSchoolYear(schoolYear);
-	//output(schoolYear);
-	addFileStudent(schoolYear->classroom->student, schoolYear->classroom->numOfStudent, "Data/student.csv");
-	updateSchoolYear(schoolYear);
 }
