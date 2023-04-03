@@ -74,7 +74,7 @@ Account* takeAccount(Account* pHead, string username, string password)
 	fout.close();
 }*/
 
-void update(Account* &pHead)
+void updateAccount(Account* &pHead)
 {
 	ofstream fout("Data/account.txt");
 	Account* cur = pHead;
