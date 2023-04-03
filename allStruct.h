@@ -60,7 +60,8 @@ struct Semester {
 struct Class
 {
 	string name;
-	Student* student;
+	int numOfStudent = 0;
+	Student* student = nullptr;
 	Class* pNext;
 };
 
@@ -69,7 +70,7 @@ struct SchoolYear
 	int startYear;
 	int endYear;
 	int numOfClass = 0;
-	Class* classroom;
+	Class* classroom = nullptr;
 	Semester* semesters;
 	SchoolYear* pNext = nullptr;
 };
@@ -86,4 +87,12 @@ struct Account
 	Date dateOfBirth;
 	string socialID;
 	Account* pNext;
+};
+
+struct StudentList
+{
+	string ID;
+	Course* course = nullptr;
+	Class* classroom = nullptr;
+	StudentList* pNext = nullptr;
 };
