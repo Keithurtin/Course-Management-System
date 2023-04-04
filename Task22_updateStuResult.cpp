@@ -1,6 +1,7 @@
 #include "allStruct.h"
 
 void updateStuResult(Course*& Cour, int stuID, int final, int midterm, int other, int total){
+    if(Cour == nullptr) return;
     string tmp;
     tmp = to_string(stuID);
     Student* Stu = Cour->Studs;
@@ -10,8 +11,9 @@ void updateStuResult(Course*& Cour, int stuID, int final, int midterm, int other
             Stu->midtermMark = midterm;
             Stu->otherMark = other;
             Stu->totalMark = total;
-            break;
+            return;
         }
         Stu = Stu->pNext;
     }
+    cout << "Student ID not found! Please try again." << endl;
 }
