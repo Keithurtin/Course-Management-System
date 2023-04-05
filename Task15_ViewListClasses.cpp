@@ -1,10 +1,10 @@
 #include"allStruct.h"
 
-void displayClassesInSchoolYear(SchoolYear* p_SchoolYear)
+void displayClassesInSchoolYear(Class* pHead)
 {
-    Class* p_CurrentClass = p_SchoolYear->classroom;
+    Class* p_CurrentClass = pHead;
 
-    cout << "List of classes in " << "School year: " << p_SchoolYear->startYear  << " - " << p_SchoolYear->endYear << ":" << endl;
+    cout << "List of classes: " << endl;
     cout << "------------------------"<<endl;
     cout  << "| " << setw(20) << left << "Name Class:" << " |" << endl;
     cout << "------------------------"<<endl;
