@@ -62,16 +62,14 @@ struct Class
 	string name;
 	int numOfStudent = 0;
 	Student* student = nullptr;
-	Class* pNext;
+	Class* pNext = nullptr;
 };
 
 struct SchoolYear
 {
 	int startYear;
 	int endYear;
-	int numOfClass = 0;
-	Class* classroom = nullptr;
-	Semester* semesters;
+	Semester* semesters = nullptr;
 	SchoolYear* pNext = nullptr;
 };
 

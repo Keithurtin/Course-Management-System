@@ -24,25 +24,19 @@ void addClassStudentList(StudentList* &sList, string ID, Class* curClass)
 		cur = cur->pNext;
 	}
 	cur->ID = ID;
-	cur->course = curCourse;
 	cur->classroom = curClass;
 	cur->pNext = nullptr;
 	
 }
 
-void readStudentList(StudentList* sList, SchoolYear* schoolYear)
+void readStudentList(StudentList* &sList, Class* classList)
 {
-	while (schoolYear)
+	while (classList)
 	{
-		int nClass = schoolYear->numOfClass;
-		Class* curClass = schoolYear->classroom;
-		for (int i = 0; i < nClass; i++)
-		{
-			int nStudent = curClass->numOfStudent;
-			Student* curStud = curClass->student;
-			for (int j = 0; j < nStudent; j++)
-				addClassStudentList(sList, curStud->studentID, curClass);
-		}
+		int nStudent = classList->numOfStudent;
+		Student* curStud = classList->student;
+		for (int i = 0; i < nStudent; i++)
+			addClassStudentList(sList, curStud->studentID, classList);
 	}
 }
 
@@ -70,11 +64,13 @@ void readStudent(Student*& studentList, int numOfStudent, ifstream& fin)
 	}
 }
 
-void readClass(Class*& classList, int numOfClass, ifstream &fin)
+void readClass(Class*& classList)
 {
-	fin.ignore();
+	ifstream fin("Data/class.txt");
+
+	classList = new Class;
 	Class* cur = classList;
-	for (int i = 0; i < numOfClass; i++)
+	while (true)
 	{
 		getline(fin, cur->name);
 		fin >> cur->numOfStudent;
@@ -83,23 +79,15 @@ void readClass(Class*& classList, int numOfClass, ifstream &fin)
 		{
 			cur->student = new Student;
 			readStudent(cur->student, cur->numOfStudent, fin);
-			/*Student* curStud = cur->student;
-			for (int j = 0; j < cur->numOfStudent; j++)
-			{
-				cout << curStud->studentID << endl;
-				curStud = curStud->pNext;
-			}*/
 		}
 		else fin.ignore();
 
-		if (i == numOfClass - 1)
-			cur->pNext = nullptr;
-		else
-		{
-			cur->pNext = new Class;
-			cur = cur->pNext;
-		}
+		if (fin.eof()) break;
+		cur->pNext = new Class;
+		cur = cur->pNext;
 	}
+
+	fin.close();
 }
 
 void readSchoolYear(SchoolYear*& pHead)
@@ -112,54 +100,34 @@ void readSchoolYear(SchoolYear*& pHead)
 	while (true)
 	{
 		fin >> cur->startYear >> cur->endYear;
-		fin >> cur->numOfClass;
-
-		if (cur->numOfClass)
-		{
-			cur->classroom = new Class;
-			readClass(cur->classroom, cur->numOfClass, fin);
-		}
-		else fin.ignore();
-		
-
-		if (fin.eof())
-		{
-			cur->pNext = nullptr;
-			break;
-		}
+		if (fin.eof()) break;
 		cur->pNext = new SchoolYear;
 		cur = cur->pNext;
 	}
-	fin.close();
-}
 
-SchoolYear* findTailSchoolYear(SchoolYear* pHead)
-{
-	if (!pHead) return pHead;
-	SchoolYear* cur = pHead;
-	if (cur->pNext) cur = cur->pNext;
-	return cur;
+	fin.close();
 }
 
 void addSchoolYear(SchoolYear* &schoolYearList, SchoolYear* &curSchoolYear)
 {
-	SchoolYear* temp = findTailSchoolYear(schoolYearList);
-	temp->pNext = curSchoolYear;
-	curSchoolYear->pNext = nullptr;
+	if (!schoolYearList) schoolYearList = curSchoolYear;
+	else
+	{
+		SchoolYear* cur = schoolYearList;
+		while (cur->pNext) cur = cur->pNext;
+		cur->pNext = curSchoolYear;
+	}
 }
 
-void addClass(Class*& classList, Class* &curClass, int &n)
+void addClass(Class*& classList, Class* &curClass)
 {
-	if (n == 0) classList = curClass;
+	if (!classList) classList = curClass;
 	else
 	{
 		Class* cur = classList;
-		for (int i = 1; i < n; i++)
-			cur = cur->pNext;
+		while (cur->pNext) cur = cur->pNext;
 		cur->pNext = curClass;
 	}
-	curClass->pNext = nullptr;
-	n++;
 }
 
 void updateSchoolYear(SchoolYear* pHead)
@@ -168,29 +136,36 @@ void updateSchoolYear(SchoolYear* pHead)
 
 	while (pHead)
 	{
-		fout << pHead->startYear << " " << pHead->endYear << endl;
-		fout << pHead->numOfClass;
-		Class* curClass = pHead->classroom;
-		for (int i = 0; i < pHead->numOfClass; i++)
-		{
-			fout << endl << curClass->name << endl << curClass->numOfStudent;
-			Student* curStudent = curClass->student;
-			for (int j = 0; j < curClass->numOfStudent; j++)
-			{
-				fout << endl;
-				fout << curStudent->No << endl;
-				fout << curStudent->studentID << endl;
-				fout << curStudent->firstName << endl;
-				fout << curStudent->lastName << endl;
-				fout << curStudent->gender << endl;
-				fout << curStudent->dateOfBirth.day << " " << curStudent->dateOfBirth.month << " " << curStudent->dateOfBirth.year << endl;
-				fout << curStudent->socialID;
-				curStudent = curStudent->pNext;
-			}
-			curClass = curClass->pNext;
-		}
+		fout << pHead->startYear << " " << pHead->endYear;
 		if (pHead->pNext) fout << endl;
 		pHead = pHead->pNext;
+	}
+
+	fout.close();
+}
+
+void updateClass(Class* curClass)
+{
+	ofstream fout("Data/class.txt");
+
+	while (curClass)
+	{
+		fout << curClass->name << endl << curClass->numOfStudent;
+		Student* curStudent = curClass->student;
+		for (int i = 0; i < curClass->numOfStudent; i++)
+		{
+			fout << endl;
+			fout << curStudent->No << endl;
+			fout << curStudent->studentID << endl;
+			fout << curStudent->firstName << endl;
+			fout << curStudent->lastName << endl;
+			fout << curStudent->gender << endl;
+			fout << curStudent->dateOfBirth.day << " " << curStudent->dateOfBirth.month << " " << curStudent->dateOfBirth.year << endl;
+			fout << curStudent->socialID;
+			curStudent = curStudent->pNext;
+		}
+		if (curClass->pNext) fout << endl;
+		curClass = curClass->pNext;
 	}
 
 	fout.close();
@@ -262,35 +237,4 @@ void addFileStudent(Student* &studentList, int& n, string path)
 	}
 
 	fin.close();
-}
-
-// This is a debug function
-void output(SchoolYear* pHead)
-{
-	while (pHead)
-	{
-		cout << pHead->startYear << " " << pHead->endYear << endl;
-		cout << pHead->numOfClass;
-		Class* curClass = pHead->classroom;
-		for (int i = 0; i < pHead->numOfClass; i++)
-		{
-			cout << endl << curClass->name << endl << curClass->numOfStudent;
-			Student* curStudent = curClass->student;
-			for (int j = 0; j < curClass->numOfStudent; j++)
-			{
-				cout << endl;
-				cout << curStudent->No << endl;
-				cout << curStudent->studentID << endl;
-				cout << curStudent->firstName << endl;
-				cout << curStudent->lastName << endl;
-				cout << curStudent->gender << endl;
-				cout << curStudent->dateOfBirth.day << " " << curStudent->dateOfBirth.month << " " << curStudent->dateOfBirth.year << endl;
-				cout << curStudent->socialID;
-				curStudent = curStudent->pNext;
-			}
-			curClass = curClass->pNext;
-		}
-		if (pHead->pNext) cout << endl;
-		pHead = pHead->pNext;
-	}
 }
