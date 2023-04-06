@@ -20,6 +20,8 @@ using namespace System::Windows::Forms;
 	Account* curAccount;
 	SchoolYear* schoolYearList = nullptr;
 	readSchoolYear(schoolYearList);
+	Class* classList = nullptr;
+	readClass(classList);
 	//
 	//
 	//
@@ -30,13 +32,14 @@ using namespace System::Windows::Forms;
 		loginForm.getData(accountList);
 		Application::Run(% loginForm);
 		curAccount = loginForm.curAccount;
-		mainForm.getData(curAccount, schoolYearList);
+		mainForm.getData(curAccount, schoolYearList, classList);
 		if (loginForm.login)
 		{
 			Application::Run(% mainForm);
-			mainForm.returnData(curAccount, schoolYearList);
+			mainForm.returnData(curAccount, schoolYearList, classList);
 			updateAccount(accountList);
 			updateSchoolYear(schoolYearList);
+			updateClass(classList);
 			if (!mainForm.logout) break;
 		}
 		else break;
