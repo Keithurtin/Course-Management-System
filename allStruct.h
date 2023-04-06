@@ -40,20 +40,20 @@ struct Course {
 	string className;
 	string teacherName;
 	int credits;
-	int maxStudents;
+	int curStudent = 0;
+	int maxStudents = 50;
 	string dayOfWeek;
 	string session;
-	Course* pNext = nullptr;
 	Student* Studs = nullptr;
+	Course* pNext = nullptr;
 };
 
 struct Semester {
 
 	unsigned short semester_num;
 	Time school_year, start_date, end_date;
-
+	int numOfCourse = 0;
 	Course* p_CourseList = nullptr;
-
 	Semester* p_Next_Semester = nullptr;
 };
 
@@ -69,6 +69,7 @@ struct SchoolYear
 {
 	int startYear;
 	int endYear;
+	int numOfSemester = 0;
 	Semester* semesters = nullptr;
 	SchoolYear* pNext = nullptr;
 };
