@@ -1,20 +1,26 @@
 #include "allStruct.h"
 
-void viewListOfCourses(Semester* pCurrentSemester, int year, int semester)
+//Nhap vao node dau tien cua nam hoc, nam hoc va hoc ki muon kiem cac khoa hoc
+void printCoursesInSemester(SchoolYear* pHead, int yearstart, int semester)
 {
-    if (pCurrentSemester == nullptr)
-    {
-        cout << "No current semester found." << endl;
+    SchoolYear* currentYear = pHead;
+    while (currentYear != nullptr && currentYear->startYear != yearstart) {
+        currentYear = currentYear->pNext;
+    }
+    if (currentYear == nullptr) {
+        cout << "Khong tim thay nam hoc " << yearstart << endl;
         return;
     }
 
-    if (pCurrentSemester->school_year.year != year || pCurrentSemester->semester_num != semester)
-    {
-        cout << "No courses found for semester " << semester << " of school year " << year<< "-"<< year + 1 << endl;
+    Semester* currentSemester = currentYear->semesters;
+    while (currentSemester != nullptr && currentSemester->semester_num != semester) {
+        currentSemester = currentSemester->p_Next_Semester;
+    }
+    if (currentSemester == nullptr) {
+        cout << "Not found " << semester << " in " << yearstart << "-" << yearstart + 1 << endl;
         return;
     }
-
-    cout << "List of courses in semester " << pCurrentSemester->semester_num << " - School year: " << pCurrentSemester->school_year.year << " - " << pCurrentSemester->school_year.year + 1 << endl;
+    cout << "List of courses in semester " << semester << "/" << yearstart << "-" << yearstart + 1 << ": " << endl;
     cout << "-----------------------------------------------------------------------------------------------------------------------------------------------------------" << endl;
     cout << "| " << setw(12) << left << "Course ID"
         << "| " << setw(35) << left << "Course Name"
@@ -26,7 +32,7 @@ void viewListOfCourses(Semester* pCurrentSemester, int year, int semester)
         << "| " << setw(11) << left << "Session" << " |" << endl;
     cout << "-----------------------------------------------------------------------------------------------------------------------------------------------------------" << endl;
 
-    Course* curCourse = pCurrentSemester->p_CourseList;
+    Course* curCourse = currentSemester->p_CourseList;
     while (curCourse != nullptr)
     {
         cout << "| " << setw(12) << left << curCourse->courseID
