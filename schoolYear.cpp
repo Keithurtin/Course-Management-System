@@ -237,6 +237,7 @@ void updateCourse(Course* courseList, int n, ofstream& fout)
 		fout << cur->dayOfWeek << endl;
 		fout << cur->session << endl;
 		fout << cur->curStudent;
+		cur = cur->pNext;
 	}
 }
 
