@@ -18,10 +18,13 @@ using namespace System::Windows::Forms;
 	Account* accountList = new Account;
 	readAccount(accountList);
 	Account* curAccount;
-	SchoolYear* schoolYearList = nullptr;
-	readSchoolYear(schoolYearList);
 	Class* classList = nullptr;
 	readClass(classList);
+	StudentList* sList = nullptr;
+	readStudentList(sList, classList);
+	SchoolYear* schoolYearList = nullptr;
+	readSchoolYear(schoolYearList, sList);
+	
 	//
 	//
 	//
