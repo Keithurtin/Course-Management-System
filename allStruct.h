@@ -31,7 +31,7 @@ struct Student
 	Date dateOfBirth;
 	string socialID;
 	int totalMark, finalMark, midtermMark, otherMark;
-	Student* pNext;
+	Student* pNext = nullptr;
 };
 
 struct Course {

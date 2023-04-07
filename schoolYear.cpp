@@ -35,7 +35,11 @@ void readStudentList(StudentList* &sList, Class* classList)
 		int nStudent = classList->numOfStudent;
 		Student* curStud = classList->student;
 		for (int i = 0; i < nStudent; i++)
+		{
 			addClassStudentList(sList, curStud->studentID, classList);
+			curStud = curStud->pNext;
+		}
+		classList = classList->pNext;
 	}
 }
 
@@ -89,7 +93,7 @@ void readClass(Class*& classList)
 	fin.close();
 }
 
-StudentList* takeStudent(StudentList* sList, string ID)
+StudentList* takeStudentList(StudentList* sList, string ID)
 {
 	while (sList && sList->ID != ID)
 		sList = sList->pNext;
@@ -101,12 +105,11 @@ void readCourseStudent(Course*& curCourse, StudentList* &sList, string filename)
 	ifstream fin(filename);
 	curCourse->Studs = new Student;
 	readStudent(curCourse->Studs, curCourse->curStudent, fin);
-
 	Student* curStud = curCourse->Studs;
 	StudentList* curSList = sList;
 	while (curStud)
 	{
-		curSList = takeStudent(sList, curStud->studentID);
+		curSList = takeStudentList(sList, curStud->studentID);	
 		curSList->course = curCourse;
 		curStud = curStud->pNext;
 	}
@@ -232,7 +235,8 @@ void updateCourse(Course* courseList, int n, ofstream& fout)
 		fout << cur->credits << endl;
 		fout << cur->maxStudents << endl;
 		fout << cur->dayOfWeek << endl;
-		fout << cur->session;
+		fout << cur->session << endl;
+		fout << cur->curStudent;
 	}
 }
 
@@ -320,9 +324,16 @@ Semester* takeSemester(Semester* semesterList, int semesterID)
 
 Course* takeCourse(Course* courseList, string ID)
 {
-	while (courseList->courseID != ID)
+	while (courseList && courseList->courseID != ID)
 		courseList = courseList->pNext;
 	return courseList;
+}
+
+Student* takeStudent(Student* studentList, string ID)
+{
+	while (studentList && studentList->studentID != ID)
+		studentList = studentList->pNext;
+	return studentList;
 }
 
 void addStudent(Student*& studentList, Student* student, int &n)
@@ -373,4 +384,75 @@ void addFileStudent(Student* &studentList, int& n, string path)
 	}
 
 	fin.close();
+}
+
+void addCourseStudent(Course*& curCourse, Student*& newStud)
+{
+	ofstream fout("Data/" + curCourse->courseID + "StudentList.txt", ios::app);
+
+	Student* cur;
+	if (!curCourse->Studs)
+	{
+		curCourse->Studs = newStud;
+		cur = curCourse->Studs;
+	}
+	else
+	{
+		fout << endl;
+		cur = curCourse->Studs;
+		while (cur->pNext) cur = cur->pNext;
+		cur->pNext = newStud;
+		cur = cur->pNext;
+	}
+	curCourse->curStudent++;
+
+	fout << cur->No << endl;
+	fout << cur->studentID << endl;
+	fout << cur->firstName << endl;
+	fout << cur->lastName << endl;
+	fout << cur->gender << endl;
+	fout << cur->dateOfBirth.day << " " << cur->dateOfBirth.month << " " << cur->dateOfBirth.year << endl;
+	fout << cur->socialID;
+
+	fout.close();
+}
+
+void addFileCourseStudent(Course*& curCourse, string path)
+{
+	ofstream fout("Data/" + curCourse->courseID + "StudentList.txt", ios::app);
+
+	bool fileEmpty = false;
+	int n = 0;
+	Student* cur = curCourse->Studs;
+	if (cur)
+	{
+		while (cur->pNext) cur = cur->pNext;
+		n = 1;
+		addFileStudent(cur, n, path);
+		curCourse->curStudent += (n - 1);
+		cur = cur->pNext;
+	}
+	else
+	{
+		fileEmpty = true;
+		addFileStudent(curCourse->Studs, curCourse->curStudent, path);
+		n = curCourse->curStudent + 1;
+		cur = curCourse->Studs;
+	}
+
+	for (int i = 1; i < n; i++)
+	{
+		if (!fileEmpty) fout << endl;
+		else fileEmpty = false;
+		fout << cur->No << endl;
+		fout << cur->studentID << endl;
+		fout << cur->firstName << endl;
+		fout << cur->lastName << endl;
+		fout << cur->gender << endl;
+		fout << cur->dateOfBirth.day << " " << cur->dateOfBirth.month << " " << cur->dateOfBirth.year << endl;
+		fout << cur->socialID;
+		cur = cur->pNext;
+	}
+
+	fout.close();
 }
