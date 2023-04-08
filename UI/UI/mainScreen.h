@@ -28,6 +28,7 @@ namespace UI {
 		bool logout = false;
 		SchoolYear* schoolYearList = nullptr;
 		Class* classList = nullptr;
+		StudentList* sList = nullptr;
 
 	public:
 
@@ -205,23 +206,26 @@ private: System::Windows::Forms::ColumnHeader^ columnHeader3;
 private: System::Windows::Forms::ColumnHeader^ columnHeader4;
 private: System::Windows::Forms::ColumnHeader^ columnHeader5;
 private: System::Windows::Forms::ColumnHeader^ columnHeader6;
-private: System::Windows::Forms::Panel^ addOneCourseStudentPanel;
-
-private: System::Windows::Forms::DateTimePicker^ addOneCourseStudDoB;
-private: System::Windows::Forms::Button^ cancalAddStudToCourseButton;
-private: System::Windows::Forms::Button^ addStudToCourseButton;
-private: System::Windows::Forms::CheckBox^ addOneCourseStudFemale;
-private: System::Windows::Forms::CheckBox^ addOneCourseStudMale;
-private: System::Windows::Forms::Label^ label33;
-private: System::Windows::Forms::Label^ label36;
-private: System::Windows::Forms::Label^ label37;
-private: System::Windows::Forms::Label^ label38;
-private: System::Windows::Forms::Label^ label39;
-private: System::Windows::Forms::Label^ label40;
 private: System::Windows::Forms::TextBox^ addOneCourseStudID;
-private: System::Windows::Forms::TextBox^ addOneCourseStudLName;
-private: System::Windows::Forms::TextBox^ addOneCourseStudSocialID;
-private: System::Windows::Forms::TextBox^ addOneCourseStudFName;
+
+private: System::Windows::Forms::Label^ label33;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -277,11 +281,12 @@ private: System::Windows::Forms::TextBox^ addOneCourseStudFName;
 			//
 		}
 
-		void getData(Account* account, SchoolYear* schoolYear, Class* classes)
+		void getData(Account* account, SchoolYear* schoolYear, Class* classes, StudentList* studentlist)
 		{
 			curAccount = account;
 			schoolYearList = schoolYear;
 			classList = classes;
+			sList = studentlist;
 		}
 
 		void returnData(Account* &account, SchoolYear* &schoolYear, Class* &classes)
@@ -507,6 +512,8 @@ private: System::Windows::Forms::TextBox^ addOneCourseStudFName;
 			this->courseListBox = (gcnew System::Windows::Forms::ListBox());
 			this->viewCourseClose = (gcnew System::Windows::Forms::Button());
 			this->viewOneCourseStudPanel = (gcnew System::Windows::Forms::Panel());
+			this->addOneCourseStudID = (gcnew System::Windows::Forms::TextBox());
+			this->label33 = (gcnew System::Windows::Forms::Label());
 			this->addOneCourseStudButton = (gcnew System::Windows::Forms::Button());
 			this->deleteOneCourseStudButton = (gcnew System::Windows::Forms::Button());
 			this->button7 = (gcnew System::Windows::Forms::Button());
@@ -517,22 +524,6 @@ private: System::Windows::Forms::TextBox^ addOneCourseStudFName;
 			this->columnHeader4 = (gcnew System::Windows::Forms::ColumnHeader());
 			this->columnHeader5 = (gcnew System::Windows::Forms::ColumnHeader());
 			this->columnHeader6 = (gcnew System::Windows::Forms::ColumnHeader());
-			this->addOneCourseStudentPanel = (gcnew System::Windows::Forms::Panel());
-			this->addOneCourseStudDoB = (gcnew System::Windows::Forms::DateTimePicker());
-			this->cancalAddStudToCourseButton = (gcnew System::Windows::Forms::Button());
-			this->addStudToCourseButton = (gcnew System::Windows::Forms::Button());
-			this->addOneCourseStudFemale = (gcnew System::Windows::Forms::CheckBox());
-			this->addOneCourseStudMale = (gcnew System::Windows::Forms::CheckBox());
-			this->label33 = (gcnew System::Windows::Forms::Label());
-			this->label36 = (gcnew System::Windows::Forms::Label());
-			this->label37 = (gcnew System::Windows::Forms::Label());
-			this->label38 = (gcnew System::Windows::Forms::Label());
-			this->label39 = (gcnew System::Windows::Forms::Label());
-			this->label40 = (gcnew System::Windows::Forms::Label());
-			this->addOneCourseStudID = (gcnew System::Windows::Forms::TextBox());
-			this->addOneCourseStudLName = (gcnew System::Windows::Forms::TextBox());
-			this->addOneCourseStudSocialID = (gcnew System::Windows::Forms::TextBox());
-			this->addOneCourseStudFName = (gcnew System::Windows::Forms::TextBox());
 			this->staffPanel->SuspendLayout();
 			this->profilePanel->SuspendLayout();
 			this->tableLayoutPanel1->SuspendLayout();
@@ -558,7 +549,6 @@ private: System::Windows::Forms::TextBox^ addOneCourseStudFName;
 			this->viewStudentPanel->SuspendLayout();
 			this->viewCoursePanel->SuspendLayout();
 			this->viewOneCourseStudPanel->SuspendLayout();
-			this->addOneCourseStudentPanel->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// staffPanel
@@ -2574,6 +2564,8 @@ private: System::Windows::Forms::TextBox^ addOneCourseStudFName;
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->viewOneCourseStudPanel->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
+			this->viewOneCourseStudPanel->Controls->Add(this->addOneCourseStudID);
+			this->viewOneCourseStudPanel->Controls->Add(this->label33);
 			this->viewOneCourseStudPanel->Controls->Add(this->addOneCourseStudButton);
 			this->viewOneCourseStudPanel->Controls->Add(this->deleteOneCourseStudButton);
 			this->viewOneCourseStudPanel->Controls->Add(this->button7);
@@ -2583,6 +2575,34 @@ private: System::Windows::Forms::TextBox^ addOneCourseStudFName;
 			this->viewOneCourseStudPanel->Size = System::Drawing::Size(636, 534);
 			this->viewOneCourseStudPanel->TabIndex = 15;
 			this->viewOneCourseStudPanel->Visible = false;
+			// 
+			// addOneCourseStudID
+			// 
+			this->addOneCourseStudID->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
+			this->addOneCourseStudID->BackColor = System::Drawing::Color::White;
+			this->addOneCourseStudID->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			this->addOneCourseStudID->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13));
+			this->addOneCourseStudID->ForeColor = System::Drawing::Color::Black;
+			this->addOneCourseStudID->Location = System::Drawing::Point(28, 379);
+			this->addOneCourseStudID->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->addOneCourseStudID->Name = L"addOneCourseStudID";
+			this->addOneCourseStudID->Size = System::Drawing::Size(582, 25);
+			this->addOneCourseStudID->TabIndex = 26;
+			this->addOneCourseStudID->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &mainScreen::addOneCourseStudID_KeyDown);
+			// 
+			// label33
+			// 
+			this->label33->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
+			this->label33->AutoSize = true;
+			this->label33->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13));
+			this->label33->ForeColor = System::Drawing::Color::White;
+			this->label33->Location = System::Drawing::Point(22, 331);
+			this->label33->Name = L"label33";
+			this->label33->Size = System::Drawing::Size(121, 26);
+			this->label33->TabIndex = 25;
+			this->label33->Text = L"Student ID:";
 			// 
 			// addOneCourseStudButton
 			// 
@@ -2596,7 +2616,7 @@ private: System::Windows::Forms::TextBox^ addOneCourseStudFName;
 			this->addOneCourseStudButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.2F, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
 			this->addOneCourseStudButton->ForeColor = System::Drawing::Color::White;
-			this->addOneCourseStudButton->Location = System::Drawing::Point(212, 464);
+			this->addOneCourseStudButton->Location = System::Drawing::Point(213, 464);
 			this->addOneCourseStudButton->Name = L"addOneCourseStudButton";
 			this->addOneCourseStudButton->Size = System::Drawing::Size(212, 39);
 			this->addOneCourseStudButton->TabIndex = 24;
@@ -2616,7 +2636,7 @@ private: System::Windows::Forms::TextBox^ addOneCourseStudFName;
 			this->deleteOneCourseStudButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.2F, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
 			this->deleteOneCourseStudButton->ForeColor = System::Drawing::Color::Black;
-			this->deleteOneCourseStudButton->Location = System::Drawing::Point(28, 464);
+			this->deleteOneCourseStudButton->Location = System::Drawing::Point(27, 464);
 			this->deleteOneCourseStudButton->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->deleteOneCourseStudButton->Name = L"deleteOneCourseStudButton";
 			this->deleteOneCourseStudButton->Size = System::Drawing::Size(122, 39);
@@ -2663,7 +2683,7 @@ private: System::Windows::Forms::TextBox^ addOneCourseStudFName;
 			this->courseStudListView->Location = System::Drawing::Point(-2, -2);
 			this->courseStudListView->MultiSelect = false;
 			this->courseStudListView->Name = L"courseStudListView";
-			this->courseStudListView->Size = System::Drawing::Size(636, 396);
+			this->courseStudListView->Size = System::Drawing::Size(636, 290);
 			this->courseStudListView->TabIndex = 12;
 			this->courseStudListView->UseCompatibleStateImageBehavior = false;
 			this->courseStudListView->View = System::Windows::Forms::View::Details;
@@ -2698,217 +2718,6 @@ private: System::Windows::Forms::TextBox^ addOneCourseStudFName;
 			this->columnHeader6->Text = L"Social ID";
 			this->columnHeader6->Width = 78;
 			// 
-			// addOneCourseStudentPanel
-			// 
-			this->addOneCourseStudentPanel->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->addOneCourseStudentPanel->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
-			this->addOneCourseStudentPanel->Controls->Add(this->addOneCourseStudDoB);
-			this->addOneCourseStudentPanel->Controls->Add(this->cancalAddStudToCourseButton);
-			this->addOneCourseStudentPanel->Controls->Add(this->addStudToCourseButton);
-			this->addOneCourseStudentPanel->Controls->Add(this->addOneCourseStudFemale);
-			this->addOneCourseStudentPanel->Controls->Add(this->addOneCourseStudMale);
-			this->addOneCourseStudentPanel->Controls->Add(this->label33);
-			this->addOneCourseStudentPanel->Controls->Add(this->label36);
-			this->addOneCourseStudentPanel->Controls->Add(this->label37);
-			this->addOneCourseStudentPanel->Controls->Add(this->label38);
-			this->addOneCourseStudentPanel->Controls->Add(this->label39);
-			this->addOneCourseStudentPanel->Controls->Add(this->label40);
-			this->addOneCourseStudentPanel->Controls->Add(this->addOneCourseStudID);
-			this->addOneCourseStudentPanel->Controls->Add(this->addOneCourseStudLName);
-			this->addOneCourseStudentPanel->Controls->Add(this->addOneCourseStudSocialID);
-			this->addOneCourseStudentPanel->Controls->Add(this->addOneCourseStudFName);
-			this->addOneCourseStudentPanel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13));
-			this->addOneCourseStudentPanel->Location = System::Drawing::Point(147, 133);
-			this->addOneCourseStudentPanel->Name = L"addOneCourseStudentPanel";
-			this->addOneCourseStudentPanel->Size = System::Drawing::Size(636, 534);
-			this->addOneCourseStudentPanel->TabIndex = 16;
-			this->addOneCourseStudentPanel->Visible = false;
-			// 
-			// addOneCourseStudDoB
-			// 
-			this->addOneCourseStudDoB->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11));
-			this->addOneCourseStudDoB->Format = System::Windows::Forms::DateTimePickerFormat::Short;
-			this->addOneCourseStudDoB->Location = System::Drawing::Point(359, 332);
-			this->addOneCourseStudDoB->Name = L"addOneCourseStudDoB";
-			this->addOneCourseStudDoB->Size = System::Drawing::Size(131, 28);
-			this->addOneCourseStudDoB->TabIndex = 13;
-			// 
-			// cancalAddStudToCourseButton
-			// 
-			this->cancalAddStudToCourseButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
-			this->cancalAddStudToCourseButton->BackColor = System::Drawing::Color::White;
-			this->cancalAddStudToCourseButton->FlatAppearance->BorderColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(5)),
-				static_cast<System::Int32>(static_cast<System::Byte>(5)), static_cast<System::Int32>(static_cast<System::Byte>(5)));
-			this->cancalAddStudToCourseButton->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Gray;
-			this->cancalAddStudToCourseButton->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Silver;
-			this->cancalAddStudToCourseButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->cancalAddStudToCourseButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.2F, System::Drawing::FontStyle::Bold,
-				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
-			this->cancalAddStudToCourseButton->ForeColor = System::Drawing::Color::Black;
-			this->cancalAddStudToCourseButton->Location = System::Drawing::Point(489, 460);
-			this->cancalAddStudToCourseButton->Name = L"cancalAddStudToCourseButton";
-			this->cancalAddStudToCourseButton->Size = System::Drawing::Size(122, 39);
-			this->cancalAddStudToCourseButton->TabIndex = 8;
-			this->cancalAddStudToCourseButton->Text = L"Cancel";
-			this->cancalAddStudToCourseButton->UseVisualStyleBackColor = false;
-			this->cancalAddStudToCourseButton->Click += gcnew System::EventHandler(this, &mainScreen::cancalAddStudToCourseButton_Click);
-			// 
-			// addStudToCourseButton
-			// 
-			this->addStudToCourseButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
-			this->addStudToCourseButton->BackColor = System::Drawing::SystemColors::HotTrack;
-			this->addStudToCourseButton->FlatAppearance->BorderColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(20)),
-				static_cast<System::Int32>(static_cast<System::Byte>(20)), static_cast<System::Int32>(static_cast<System::Byte>(20)));
-			this->addStudToCourseButton->FlatAppearance->MouseDownBackColor = System::Drawing::SystemColors::MenuHighlight;
-			this->addStudToCourseButton->FlatAppearance->MouseOverBackColor = System::Drawing::SystemColors::Highlight;
-			this->addStudToCourseButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->addStudToCourseButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.2F, System::Drawing::FontStyle::Bold,
-				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
-			this->addStudToCourseButton->ForeColor = System::Drawing::Color::White;
-			this->addStudToCourseButton->Location = System::Drawing::Point(26, 460);
-			this->addStudToCourseButton->Name = L"addStudToCourseButton";
-			this->addStudToCourseButton->Size = System::Drawing::Size(122, 39);
-			this->addStudToCourseButton->TabIndex = 7;
-			this->addStudToCourseButton->Text = L"Add";
-			this->addStudToCourseButton->UseVisualStyleBackColor = false;
-			this->addStudToCourseButton->Click += gcnew System::EventHandler(this, &mainScreen::addStudToCourseButton_Click);
-			// 
-			// addOneCourseStudFemale
-			// 
-			this->addOneCourseStudFemale->AutoSize = true;
-			this->addOneCourseStudFemale->ForeColor = System::Drawing::Color::White;
-			this->addOneCourseStudFemale->Location = System::Drawing::Point(26, 333);
-			this->addOneCourseStudFemale->Name = L"addOneCourseStudFemale";
-			this->addOneCourseStudFemale->Size = System::Drawing::Size(107, 30);
-			this->addOneCourseStudFemale->TabIndex = 2;
-			this->addOneCourseStudFemale->Text = L"Female";
-			this->addOneCourseStudFemale->UseVisualStyleBackColor = true;
-			// 
-			// addOneCourseStudMale
-			// 
-			this->addOneCourseStudMale->AutoSize = true;
-			this->addOneCourseStudMale->ForeColor = System::Drawing::Color::White;
-			this->addOneCourseStudMale->Location = System::Drawing::Point(26, 295);
-			this->addOneCourseStudMale->Name = L"addOneCourseStudMale";
-			this->addOneCourseStudMale->Size = System::Drawing::Size(81, 30);
-			this->addOneCourseStudMale->TabIndex = 2;
-			this->addOneCourseStudMale->Text = L"Male";
-			this->addOneCourseStudMale->UseVisualStyleBackColor = true;
-			// 
-			// label33
-			// 
-			this->label33->AutoSize = true;
-			this->label33->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13));
-			this->label33->ForeColor = System::Drawing::Color::White;
-			this->label33->Location = System::Drawing::Point(23, 37);
-			this->label33->Name = L"label33";
-			this->label33->Size = System::Drawing::Size(121, 26);
-			this->label33->TabIndex = 0;
-			this->label33->Text = L"Student ID:";
-			// 
-			// label36
-			// 
-			this->label36->AutoSize = true;
-			this->label36->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13));
-			this->label36->ForeColor = System::Drawing::Color::White;
-			this->label36->Location = System::Drawing::Point(208, 259);
-			this->label36->Name = L"label36";
-			this->label36->Size = System::Drawing::Size(106, 26);
-			this->label36->TabIndex = 0;
-			this->label36->Text = L"Social ID:";
-			// 
-			// label37
-			// 
-			this->label37->AutoSize = true;
-			this->label37->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13));
-			this->label37->ForeColor = System::Drawing::Color::White;
-			this->label37->Location = System::Drawing::Point(208, 332);
-			this->label37->Name = L"label37";
-			this->label37->Size = System::Drawing::Size(132, 26);
-			this->label37->TabIndex = 0;
-			this->label37->Text = L"Day of Birth:";
-			// 
-			// label38
-			// 
-			this->label38->AutoSize = true;
-			this->label38->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13));
-			this->label38->ForeColor = System::Drawing::Color::White;
-			this->label38->Location = System::Drawing::Point(22, 257);
-			this->label38->Name = L"label38";
-			this->label38->Size = System::Drawing::Size(90, 26);
-			this->label38->TabIndex = 0;
-			this->label38->Text = L"Gender:";
-			// 
-			// label39
-			// 
-			this->label39->AutoSize = true;
-			this->label39->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13));
-			this->label39->ForeColor = System::Drawing::Color::White;
-			this->label39->Location = System::Drawing::Point(22, 150);
-			this->label39->Name = L"label39";
-			this->label39->Size = System::Drawing::Size(121, 26);
-			this->label39->TabIndex = 0;
-			this->label39->Text = L"First name:";
-			// 
-			// label40
-			// 
-			this->label40->AutoSize = true;
-			this->label40->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13));
-			this->label40->ForeColor = System::Drawing::Color::White;
-			this->label40->Location = System::Drawing::Point(207, 150);
-			this->label40->Name = L"label40";
-			this->label40->Size = System::Drawing::Size(120, 26);
-			this->label40->TabIndex = 0;
-			this->label40->Text = L"Last name:";
-			// 
-			// addOneCourseStudID
-			// 
-			this->addOneCourseStudID->BackColor = System::Drawing::Color::White;
-			this->addOneCourseStudID->BorderStyle = System::Windows::Forms::BorderStyle::None;
-			this->addOneCourseStudID->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13));
-			this->addOneCourseStudID->ForeColor = System::Drawing::Color::Black;
-			this->addOneCourseStudID->Location = System::Drawing::Point(27, 78);
-			this->addOneCourseStudID->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->addOneCourseStudID->Name = L"addOneCourseStudID";
-			this->addOneCourseStudID->Size = System::Drawing::Size(584, 25);
-			this->addOneCourseStudID->TabIndex = 1;
-			// 
-			// addOneCourseStudLName
-			// 
-			this->addOneCourseStudLName->BackColor = System::Drawing::Color::White;
-			this->addOneCourseStudLName->BorderStyle = System::Windows::Forms::BorderStyle::None;
-			this->addOneCourseStudLName->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13));
-			this->addOneCourseStudLName->ForeColor = System::Drawing::Color::Black;
-			this->addOneCourseStudLName->Location = System::Drawing::Point(212, 189);
-			this->addOneCourseStudLName->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->addOneCourseStudLName->Name = L"addOneCourseStudLName";
-			this->addOneCourseStudLName->Size = System::Drawing::Size(398, 25);
-			this->addOneCourseStudLName->TabIndex = 1;
-			// 
-			// addOneCourseStudSocialID
-			// 
-			this->addOneCourseStudSocialID->BackColor = System::Drawing::Color::White;
-			this->addOneCourseStudSocialID->BorderStyle = System::Windows::Forms::BorderStyle::None;
-			this->addOneCourseStudSocialID->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13));
-			this->addOneCourseStudSocialID->ForeColor = System::Drawing::Color::Black;
-			this->addOneCourseStudSocialID->Location = System::Drawing::Point(359, 263);
-			this->addOneCourseStudSocialID->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->addOneCourseStudSocialID->Name = L"addOneCourseStudSocialID";
-			this->addOneCourseStudSocialID->Size = System::Drawing::Size(252, 25);
-			this->addOneCourseStudSocialID->TabIndex = 1;
-			// 
-			// addOneCourseStudFName
-			// 
-			this->addOneCourseStudFName->BackColor = System::Drawing::Color::White;
-			this->addOneCourseStudFName->BorderStyle = System::Windows::Forms::BorderStyle::None;
-			this->addOneCourseStudFName->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13));
-			this->addOneCourseStudFName->ForeColor = System::Drawing::Color::Black;
-			this->addOneCourseStudFName->Location = System::Drawing::Point(27, 189);
-			this->addOneCourseStudFName->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->addOneCourseStudFName->Name = L"addOneCourseStudFName";
-			this->addOneCourseStudFName->Size = System::Drawing::Size(145, 25);
-			this->addOneCourseStudFName->TabIndex = 1;
-			// 
 			// mainScreen
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
@@ -2918,7 +2727,6 @@ private: System::Windows::Forms::TextBox^ addOneCourseStudFName;
 			this->ClientSize = System::Drawing::Size(885, 767);
 			this->Controls->Add(this->menuPanel);
 			this->Controls->Add(this->staffPanel);
-			this->Controls->Add(this->addOneCourseStudentPanel);
 			this->Controls->Add(this->viewOneCourseStudPanel);
 			this->Controls->Add(this->coursePanel);
 			this->Controls->Add(this->viewStudentPanel);
@@ -2970,8 +2778,7 @@ private: System::Windows::Forms::TextBox^ addOneCourseStudFName;
 			this->viewStudentPanel->ResumeLayout(false);
 			this->viewCoursePanel->ResumeLayout(false);
 			this->viewOneCourseStudPanel->ResumeLayout(false);
-			this->addOneCourseStudentPanel->ResumeLayout(false);
-			this->addOneCourseStudentPanel->PerformLayout();
+			this->viewOneCourseStudPanel->PerformLayout();
 			this->ResumeLayout(false);
 
 		}
@@ -3000,7 +2807,6 @@ private: System::Windows::Forms::TextBox^ addOneCourseStudFName;
 			if (viewStudentPanel->Visible) viewStudentClass->Hide();
 			if (viewCoursePanel->Visible) viewCoursePanel->Hide();
 			if (viewOneCourseStudPanel->Visible) viewOneCourseStudPanel->Hide();
-			if (addOneCourseStudentPanel->Visible) addOneCourseStudentPanel->Hide();
 		}
 
 	private:
@@ -3325,8 +3131,11 @@ private: System::Windows::Forms::TextBox^ addOneCourseStudFName;
 			if (Male->Checked) newStud->gender = "Male";
 			else newStud->gender = "Female";
 
-			addStudent(curClass->student, newStud, curClass->numOfStudent);
+			StudentList* curList = sList;
+			addStudent(curClass, newStud, curList);
+			clearStudentButton->Show();
 			clearStudentButton->PerformClick();
+			clearStudentButton->Hide();
 			MessageBox::Show("New student added", "", MessageBoxButtons::OK, MessageBoxIcon::Asterisk);
 			studentNo->Focus();
 		}
@@ -3383,7 +3192,8 @@ private: System::Windows::Forms::TextBox^ addOneCourseStudFName;
 			if (file->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
 				if ((myStream = file->OpenFile()) != nullptr) {
 					String^ fileName = file->InitialDirectory + file->FileName;
-					addFileStudent(curClass->student, curClass->numOfStudent, convertToString(fileName));
+					StudentList* curList = sList;
+					addFileStudent(curClass, curList, convertToString(fileName));
 				}
 
 				MessageBox::Show("Succesfully imported student list", "", MessageBoxButtons::OK, MessageBoxIcon::Asterisk);
@@ -3533,6 +3343,8 @@ private: System::Windows::Forms::TextBox^ addOneCourseStudFName;
 	private: 
 		System::Void importCourseStud_Click(System::Object^ sender, System::EventArgs^ e) {
 			checkCoursInput();
+			StudentList* sList = nullptr;
+			readStudentList(sList, classList);
 			string startYear = convertToString(schoolYearBox->Text->Substring(0, 4));
 			string endYear = convertToString(schoolYearBox->Text->Substring(7));
 			SchoolYear* curYear = takeYear(schoolYearList, stoi(startYear), stoi(endYear));
@@ -3567,7 +3379,8 @@ private: System::Windows::Forms::TextBox^ addOneCourseStudFName;
 			if (file->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
 				if ((myStream = file->OpenFile()) != nullptr) {
 					String^ fileName = file->InitialDirectory + file->FileName;
-					addFileCourseStudent(newCourse, convertToString(fileName));
+					StudentList* curList = sList;
+					addFileCourseStudent(newCourse, curList, convertToString(fileName));
 				}
 				myStream->Close();
 			}
@@ -3769,6 +3582,12 @@ private: System::Windows::Forms::TextBox^ addOneCourseStudFName;
 
 				string filename = "Data/" + oneCourse->courseID + "StudentList.txt";
 				remove(filename.c_str());
+				while (oneCourse->Studs)
+				{
+					Student* temp = oneCourse->Studs;
+					oneCourse->Studs = oneCourse->Studs->pNext;
+					delete temp;
+				}
 				delete oneCourse;
 				oneCourse = nullptr;
 				oneSemester->numOfCourse--;
@@ -3816,15 +3635,17 @@ private: System::Windows::Forms::TextBox^ addOneCourseStudFName;
 					oneCourse->Studs = curStud->pNext;
 					temp = curStud;
 					curStud = oneCourse->Studs;
-					delete temp;
 				}
 				else {
 					while (curStud->pNext->studentID != ID) curStud = curStud->pNext;
 					temp = curStud->pNext;
 					curStud->pNext = temp->pNext;
 					curStud = curStud->pNext;
-					delete temp;
 				}
+				StudentList* curList = takeStudentList(sList, temp->studentID);
+				curList->course = nullptr;
+				delete temp;
+
 				oneCourse->curStudent--;
 				while (curStud) {
 					curStud->No--;
@@ -3849,82 +3670,47 @@ private: System::Windows::Forms::TextBox^ addOneCourseStudFName;
 				viewOneCourseStudButton->PerformClick();
 			}
 		}
-
-
-	private: System::Void cancalAddStudToCourseButton_Click(System::Object^ sender, System::EventArgs^ e) {
-		addOneCourseStudID->Text = "";
-		addOneCourseStudFName->Text = "";
-		addOneCourseStudLName->Text = "";
-		addOneCourseStudSocialID->Text = "";
-		addOneCourseStudentPanel->Hide();
-	}
-
+	
 	private: 
 		System::Void addOneCourseStudButton_Click(System::Object^ sender, System::EventArgs^ e) {
-			addOneCourseStudentPanel->Show();
-			addOneCourseStudentPanel->BringToFront();
-		}
-	
-	private:
-		void checkInputStudToCourse() {
-			if (addOneCourseStudID->Text == "")
-			{
+			if (addOneCourseStudID->Text == "") {
 				MessageBox::Show("Please input student ID!", "", MessageBoxButtons::OK, MessageBoxIcon::Error);
-				addOneCourseStudID->Focus();
 				return;
 			}
 
-			if (addOneCourseStudFName->Text == "")
-			{
-				MessageBox::Show("Please input student's first name!", "", MessageBoxButtons::OK, MessageBoxIcon::Error);
-				addOneCourseStudFName->Focus();
+			string ID = convertToString(addOneCourseStudID->Text);
+			StudentList* curSList = takeStudentList(sList, ID);
+			if (!curSList) {
+				MessageBox::Show("Invalid student ID!", "", MessageBoxButtons::OK, MessageBoxIcon::Error);
 				return;
 			}
 
-			if (addOneCourseStudLName->Text == "")
-			{
-				MessageBox::Show("Please input student's last name!", "", MessageBoxButtons::OK, MessageBoxIcon::Error);
-				addOneCourseStudLName->Focus();
+			if (curSList->course == oneCourse) {
+				MessageBox::Show("Student already in this course!", "", MessageBoxButtons::OK, MessageBoxIcon::Error);
 				return;
 			}
 
-			if (addOneCourseStudSocialID->Text == "")
-			{
-				MessageBox::Show("Please input student's social ID!", "", MessageBoxButtons::OK, MessageBoxIcon::Error);
-				addOneCourseStudSocialID->Focus();
-				return;
-			}
-
-			if (!addOneCourseStudMale->Checked && !addOneCourseStudFemale->Checked)
-			{
-				MessageBox::Show("Please choose student's gender!", "", MessageBoxButtons::OK, MessageBoxIcon::Error);
-				return;
-			}
+			Student* curStud = takeStudent(curSList->classroom->student, ID);
+			Student* newStud = new Student;
+			newStud->No = oneCourse->curStudent + 1;
+			newStud->studentID = curStud->studentID;
+			newStud->firstName = curStud->firstName;
+			newStud->lastName = curStud->lastName;
+			newStud->gender = curStud->gender;
+			newStud->socialID = curStud->socialID;
+			newStud->dateOfBirth.day = curStud->dateOfBirth.day;
+			newStud->dateOfBirth.month = curStud->dateOfBirth.month;
+			newStud->dateOfBirth.year = curStud->dateOfBirth.year;
+			Course* curCourse = oneCourse;
+			addCourseStudent(curCourse, newStud, curSList);
+			addOneCourseStudID->Text = "";
+			viewOneCourseStudButton->PerformClick();
 		}
 
 	private: 
-		System::Void addStudToCourseButton_Click(System::Object^ sender, System::EventArgs^ e) {
-			checkInputStudToCourse();
-
-			oneCourse->curStudent++;
-			Student* newStud = new Student;
-			newStud->No = oneCourse->curStudent;
-			newStud->studentID = convertToString(addOneCourseStudID->Text);
-			newStud->firstName = convertToString(addOneCourseStudFName->Text);
-			newStud->lastName = convertToString(addOneCourseStudLName->Text);
-			newStud->dateOfBirth.day = stringToInt(addOneCourseStudDoB->Value.Day.ToString());
-			newStud->dateOfBirth.month = stringToInt(addOneCourseStudDoB->Value.Month.ToString());
-			newStud->dateOfBirth.year = stringToInt(addOneCourseStudDoB->Value.Year.ToString());
-			newStud->socialID = convertToString(addOneCourseStudSocialID->Text);
-			if (addOneCourseStudMale->Checked) newStud->gender = "Male";
-			else newStud->gender = "Female";
-
-			Course* cur = oneCourse;
-			addCourseStudent(cur, newStud);
-
-			
-			MessageBox::Show("New student added", "", MessageBoxButtons::OK, MessageBoxIcon::Asterisk);
-			cancalAddStudToCourseButton->PerformClick();
+		System::Void addOneCourseStudID_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
+			if (e->KeyValue == (int)Keys::Enter || e->KeyValue == (int)Keys::Tab)
+				addOneCourseStudButton->PerformClick();
 		}
 };
 }

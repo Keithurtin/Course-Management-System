@@ -337,21 +337,22 @@ Student* takeStudent(Student* studentList, string ID)
 	return studentList;
 }
 
-void addStudent(Student*& studentList, Student* student, int &n)
+void addStudent(Class* &classList, Student* student, StudentList* &sList)
 {
-	if (n == 0) studentList = student;
+	if (!classList->student) classList->student = student;
 	else
 	{
-		Student* cur = studentList;
-		for (int i = 1; i < n; i++)
+		Student* cur = classList->student;
+		for (int i = 1; i < classList->numOfStudent; i++)
 			cur = cur->pNext;
 		cur->pNext = student;
 	}
+	addClassStudentList(sList, student->studentID, classList);
 	student->pNext = nullptr;
-	n++;
+	classList->numOfStudent++;
 }
 
-void addFileStudent(Student* &studentList, int& n, string path)
+void addFileStudent(Class* &classList, StudentList* &sList, string path)
 {
 	ifstream fin(path);
 
@@ -381,13 +382,13 @@ void addFileStudent(Student* &studentList, int& n, string path)
 		cur->dateOfBirth.year = stoi(date[2]);
 		cur->socialID = row[6];
 
-		addStudent(studentList, cur, n);
+		addStudent(classList, cur, sList);
 	}
 
 	fin.close();
 }
 
-void addCourseStudent(Course*& curCourse, Student*& newStud)
+void addCourseStudent(Course*& curCourse, Student*& newStud, StudentList* &sList)
 {
 	ofstream fout("Data/" + curCourse->courseID + "StudentList.txt", ios::app);
 
@@ -406,6 +407,8 @@ void addCourseStudent(Course*& curCourse, Student*& newStud)
 		cur = cur->pNext;
 	}
 	curCourse->curStudent++;
+	StudentList* curSList = takeStudentList(sList, cur->studentID);
+	curSList->course = curCourse;
 
 	fout << cur->No << endl;
 	fout << cur->studentID << endl;
@@ -418,42 +421,38 @@ void addCourseStudent(Course*& curCourse, Student*& newStud)
 	fout.close();
 }
 
-void addFileCourseStudent(Course*& curCourse, string path)
+void addFileCourseStudent(Course*& curCourse, StudentList* &sList, string path)
 {
-	ofstream fout("Data/" + curCourse->courseID + "StudentList.txt", ios::app);
+	ifstream fin(path);
 
-	bool fileEmpty = false;
-	int n = 0;
-	Student* cur = curCourse->Studs;
-	if (cur)
-	{
-		while (cur->pNext) cur = cur->pNext;
-		n = 1;
-		addFileStudent(cur, n, path);
-		curCourse->curStudent += (n - 1);
-		cur = cur->pNext;
-	}
-	else
-	{
-		fileEmpty = true;
-		addFileStudent(curCourse->Studs, curCourse->curStudent, path);
-		n = curCourse->curStudent + 1;
-		cur = curCourse->Studs;
-	}
+	string line, data, dayta;
+	vector<string> row, date;
+	getline(fin, line);
 
-	for (int i = 1; i < n; i++)
+	while (true)
 	{
-		if (!fileEmpty) fout << endl;
-		else fileEmpty = false;
-		fout << cur->No << endl;
-		fout << cur->studentID << endl;
-		fout << cur->firstName << endl;
-		fout << cur->lastName << endl;
-		fout << cur->gender << endl;
-		fout << cur->dateOfBirth.day << " " << cur->dateOfBirth.month << " " << cur->dateOfBirth.year << endl;
-		fout << cur->socialID;
-		cur = cur->pNext;
+		if (fin.eof()) break;
+		Student* cur = new Student;
+		row.clear();
+		date.clear();
+		getline(fin, line);
+		stringstream s(line);
+		while (getline(s, data, ',')) row.push_back(data);
+
+		cur->No = stoi(row[0]);
+		cur->studentID = row[1];
+		cur->firstName = row[2];
+		cur->lastName = row[3];
+		cur->gender = row[4];
+		stringstream day(row[5]);
+		while (getline(day, dayta, '/')) date.push_back(dayta);
+		cur->dateOfBirth.day = stoi(date[0]);
+		cur->dateOfBirth.month = stoi(date[1]);
+		cur->dateOfBirth.year = stoi(date[2]);
+		cur->socialID = row[6];
+
+		addCourseStudent(curCourse, cur, sList);
 	}
 
-	fout.close();
+	fin.close();
 }

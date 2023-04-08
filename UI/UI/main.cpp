@@ -35,7 +35,7 @@ using namespace System::Windows::Forms;
 		loginForm.getData(accountList);
 		Application::Run(% loginForm);
 		curAccount = loginForm.curAccount;
-		mainForm.getData(curAccount, schoolYearList, classList);
+		mainForm.getData(curAccount, schoolYearList, classList, sList);
 		if (loginForm.login)
 		{
 			Application::Run(% mainForm);
