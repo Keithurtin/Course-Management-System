@@ -2,6 +2,10 @@
 #include "ImportScoreboard.h"
 
 void Input_ScoreboardOfCourse_FromFile(ifstream& Scoreboard, Course*& Cour){
+    if (Cour == nullptr) {
+        cout << "Error: null pointer passed to function.\n";
+        return;
+    }
     Scoreboard.open("Scoreboard.csv");
     if(Scoreboard.is_open() == false){
         cout << "Can not open input file. \n";
@@ -32,9 +36,6 @@ void Input_ScoreboardOfCourse_FromFile(ifstream& Scoreboard, Course*& Cour){
         }
 
         string tmp;
-
-        getline(Scoreboard, tmp, ',');
-        Stu->No = stoi(tmp);
 
         getline(Scoreboard, Stu->studentID, ',');
         getline(Scoreboard, Stu->firstName, ' ');

@@ -2,8 +2,8 @@
 
 void ViewScoreboardOf1Course(Course* cour){
     Student* Stu = cour->Studs;
-    
-    cout << "Scoreboard Of " << cour->courseName << "- Class " << cour->className << endl;
+    // neu k co course name hay class name thi se k chay dc
+    cout << "Scoreboard Of "; // << cour->courseName << "- Class " << cour->className << endl;
     cout << "--------------------------------------------------------------------------------------------------" << endl;
     cout << "| " << setw(5) << left << "No"
         << "| " << setw(12) << left << "Student ID"
@@ -13,8 +13,9 @@ void ViewScoreboardOf1Course(Course* cour){
         << "| " << setw(10) << left << "Other "
         << "| " << setw(10) << left << "Total " << " |" << endl;
     cout << "--------------------------------------------------------------------------------------------------" << endl;
+    int i = 1;
     while (Stu != nullptr) {
-        cout << "| " << setw(5) << left << Stu->No
+        cout << "| " << setw(5) << left << i++
             << "| " << setw(12) << left << Stu->studentID
             << "| " << setw(25) << left << Stu->fullname
             << "| " << setw(10) << left << Stu->finalMark
