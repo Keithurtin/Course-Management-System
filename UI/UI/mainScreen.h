@@ -7,6 +7,7 @@
 #include "allStruct.h"
 #include "loginScreen.h"
 #include "schoolYear.h"
+#include "scoreboard.h"
 
 namespace UI {
 
@@ -209,6 +210,29 @@ private: System::Windows::Forms::ColumnHeader^ columnHeader6;
 private: System::Windows::Forms::TextBox^ addOneCourseStudID;
 
 private: System::Windows::Forms::Label^ label33;
+private: System::Windows::Forms::Button^ scoreboardButton;
+private: System::Windows::Forms::Button^ importScoreboardButton;
+private: System::Windows::Forms::Button^ exportScoreboardButton;
+private: System::Windows::Forms::Button^ viewScoreboardButton;
+
+
+
+private: System::Windows::Forms::Panel^ importPanel;
+private: System::Windows::Forms::ComboBox^ courseBox;
+private: System::Windows::Forms::Label^ label35;
+
+private: System::Windows::Forms::Button^ button9;
+private: System::Windows::Forms::Button^ ImportButton;
+private: System::Windows::Forms::Panel^ ExportScoreboardPanel;
+private: System::Windows::Forms::Button^ exportCourseStudButton;
+
+private: System::Windows::Forms::Button^ button10;
+private: System::Windows::Forms::ComboBox^ exportCourseBox;
+private: System::Windows::Forms::Label^ label36;
+
+
+
+
 
 
 
@@ -445,7 +469,11 @@ private: System::Windows::Forms::Label^ label33;
 			this->newSemester = (gcnew System::Windows::Forms::Button());
 			this->viewButton = (gcnew System::Windows::Forms::Button());
 			this->viewCourse = (gcnew System::Windows::Forms::Button());
+			this->scoreboardButton = (gcnew System::Windows::Forms::Button());
 			this->viewClass = (gcnew System::Windows::Forms::Button());
+			this->importScoreboardButton = (gcnew System::Windows::Forms::Button());
+			this->exportScoreboardButton = (gcnew System::Windows::Forms::Button());
+			this->viewScoreboardButton = (gcnew System::Windows::Forms::Button());
 			this->schoolYearPanel = (gcnew System::Windows::Forms::Panel());
 			this->tableLayoutPanel5 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->panel4 = (gcnew System::Windows::Forms::Panel());
@@ -524,6 +552,16 @@ private: System::Windows::Forms::Label^ label33;
 			this->columnHeader4 = (gcnew System::Windows::Forms::ColumnHeader());
 			this->columnHeader5 = (gcnew System::Windows::Forms::ColumnHeader());
 			this->columnHeader6 = (gcnew System::Windows::Forms::ColumnHeader());
+			this->importPanel = (gcnew System::Windows::Forms::Panel());
+			this->ImportButton = (gcnew System::Windows::Forms::Button());
+			this->button9 = (gcnew System::Windows::Forms::Button());
+			this->courseBox = (gcnew System::Windows::Forms::ComboBox());
+			this->label35 = (gcnew System::Windows::Forms::Label());
+			this->ExportScoreboardPanel = (gcnew System::Windows::Forms::Panel());
+			this->exportCourseStudButton = (gcnew System::Windows::Forms::Button());
+			this->button10 = (gcnew System::Windows::Forms::Button());
+			this->exportCourseBox = (gcnew System::Windows::Forms::ComboBox());
+			this->label36 = (gcnew System::Windows::Forms::Label());
 			this->staffPanel->SuspendLayout();
 			this->profilePanel->SuspendLayout();
 			this->tableLayoutPanel1->SuspendLayout();
@@ -549,6 +587,8 @@ private: System::Windows::Forms::Label^ label33;
 			this->viewStudentPanel->SuspendLayout();
 			this->viewCoursePanel->SuspendLayout();
 			this->viewOneCourseStudPanel->SuspendLayout();
+			this->importPanel->SuspendLayout();
+			this->ExportScoreboardPanel->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// staffPanel
@@ -960,7 +1000,7 @@ private: System::Windows::Forms::Label^ label33;
 			this->addStudentFromFile->Name = L"addStudentFromFile";
 			this->addStudentFromFile->Size = System::Drawing::Size(122, 39);
 			this->addStudentFromFile->TabIndex = 7;
-			this->addStudentFromFile->Text = L"File";
+			this->addStudentFromFile->Text = L"Import";
 			this->addStudentFromFile->UseVisualStyleBackColor = false;
 			this->addStudentFromFile->Click += gcnew System::EventHandler(this, &mainScreen::addStudentFromFile_Click);
 			// 
@@ -1423,10 +1463,14 @@ private: System::Windows::Forms::Label^ label33;
 			this->tableLayoutPanel6->Controls->Add(this->newSemester, 0, 4);
 			this->tableLayoutPanel6->Controls->Add(this->viewButton, 0, 5);
 			this->tableLayoutPanel6->Controls->Add(this->viewCourse, 0, 7);
+			this->tableLayoutPanel6->Controls->Add(this->scoreboardButton, 0, 8);
 			this->tableLayoutPanel6->Controls->Add(this->viewClass, 0, 6);
+			this->tableLayoutPanel6->Controls->Add(this->importScoreboardButton, 0, 9);
+			this->tableLayoutPanel6->Controls->Add(this->exportScoreboardButton, 0, 10);
+			this->tableLayoutPanel6->Controls->Add(this->viewScoreboardButton, 0, 11);
 			this->tableLayoutPanel6->Location = System::Drawing::Point(0, 0);
 			this->tableLayoutPanel6->Name = L"tableLayoutPanel6";
-			this->tableLayoutPanel6->RowCount = 9;
+			this->tableLayoutPanel6->RowCount = 13;
 			this->tableLayoutPanel6->RowStyles->Add((gcnew System::Windows::Forms::RowStyle()));
 			this->tableLayoutPanel6->RowStyles->Add((gcnew System::Windows::Forms::RowStyle()));
 			this->tableLayoutPanel6->RowStyles->Add((gcnew System::Windows::Forms::RowStyle()));
@@ -1435,8 +1479,12 @@ private: System::Windows::Forms::Label^ label33;
 			this->tableLayoutPanel6->RowStyles->Add((gcnew System::Windows::Forms::RowStyle()));
 			this->tableLayoutPanel6->RowStyles->Add((gcnew System::Windows::Forms::RowStyle()));
 			this->tableLayoutPanel6->RowStyles->Add((gcnew System::Windows::Forms::RowStyle()));
-			this->tableLayoutPanel6->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 49)));
-			this->tableLayoutPanel6->Size = System::Drawing::Size(135, 516);
+			this->tableLayoutPanel6->RowStyles->Add((gcnew System::Windows::Forms::RowStyle()));
+			this->tableLayoutPanel6->RowStyles->Add((gcnew System::Windows::Forms::RowStyle()));
+			this->tableLayoutPanel6->RowStyles->Add((gcnew System::Windows::Forms::RowStyle()));
+			this->tableLayoutPanel6->RowStyles->Add((gcnew System::Windows::Forms::RowStyle()));
+			this->tableLayoutPanel6->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 20)));
+			this->tableLayoutPanel6->Size = System::Drawing::Size(135, 720);
 			this->tableLayoutPanel6->TabIndex = 0;
 			// 
 			// newStudent
@@ -1450,10 +1498,10 @@ private: System::Windows::Forms::Label^ label33;
 			this->newStudent->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->newStudent->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9));
 			this->newStudent->ForeColor = System::Drawing::Color::White;
-			this->newStudent->Location = System::Drawing::Point(10, 187);
+			this->newStudent->Location = System::Drawing::Point(10, 178);
 			this->newStudent->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->newStudent->Name = L"newStudent";
-			this->newStudent->Size = System::Drawing::Size(115, 58);
+			this->newStudent->Size = System::Drawing::Size(115, 52);
 			this->newStudent->TabIndex = 1;
 			this->newStudent->Text = L"Student";
 			this->newStudent->UseVisualStyleBackColor = true;
@@ -1471,10 +1519,10 @@ private: System::Windows::Forms::Label^ label33;
 			this->newClass->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->newClass->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9));
 			this->newClass->ForeColor = System::Drawing::Color::White;
-			this->newClass->Location = System::Drawing::Point(10, 125);
+			this->newClass->Location = System::Drawing::Point(10, 122);
 			this->newClass->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->newClass->Name = L"newClass";
-			this->newClass->Size = System::Drawing::Size(115, 58);
+			this->newClass->Size = System::Drawing::Size(115, 52);
 			this->newClass->TabIndex = 1;
 			this->newClass->Text = L"Class";
 			this->newClass->UseVisualStyleBackColor = true;
@@ -1492,12 +1540,12 @@ private: System::Windows::Forms::Label^ label33;
 			this->newButton->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(25)),
 				static_cast<System::Int32>(static_cast<System::Byte>(25)), static_cast<System::Int32>(static_cast<System::Byte>(25)));
 			this->newButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->newButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13));
+			this->newButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11));
 			this->newButton->ForeColor = System::Drawing::Color::White;
 			this->newButton->Location = System::Drawing::Point(3, 2);
 			this->newButton->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->newButton->Name = L"newButton";
-			this->newButton->Size = System::Drawing::Size(129, 57);
+			this->newButton->Size = System::Drawing::Size(129, 60);
 			this->newButton->TabIndex = 0;
 			this->newButton->Text = L"New";
 			this->newButton->UseVisualStyleBackColor = false;
@@ -1514,10 +1562,10 @@ private: System::Windows::Forms::Label^ label33;
 			this->newSchoolYear->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->newSchoolYear->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9));
 			this->newSchoolYear->ForeColor = System::Drawing::Color::White;
-			this->newSchoolYear->Location = System::Drawing::Point(10, 63);
+			this->newSchoolYear->Location = System::Drawing::Point(10, 66);
 			this->newSchoolYear->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->newSchoolYear->Name = L"newSchoolYear";
-			this->newSchoolYear->Size = System::Drawing::Size(115, 58);
+			this->newSchoolYear->Size = System::Drawing::Size(115, 52);
 			this->newSchoolYear->TabIndex = 1;
 			this->newSchoolYear->Text = L"School year";
 			this->newSchoolYear->UseVisualStyleBackColor = true;
@@ -1535,10 +1583,10 @@ private: System::Windows::Forms::Label^ label33;
 			this->newSemester->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->newSemester->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9));
 			this->newSemester->ForeColor = System::Drawing::Color::White;
-			this->newSemester->Location = System::Drawing::Point(10, 249);
+			this->newSemester->Location = System::Drawing::Point(10, 234);
 			this->newSemester->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->newSemester->Name = L"newSemester";
-			this->newSemester->Size = System::Drawing::Size(115, 58);
+			this->newSemester->Size = System::Drawing::Size(115, 52);
 			this->newSemester->TabIndex = 1;
 			this->newSemester->Text = L"Semester";
 			this->newSemester->UseVisualStyleBackColor = true;
@@ -1556,12 +1604,12 @@ private: System::Windows::Forms::Label^ label33;
 			this->viewButton->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(25)),
 				static_cast<System::Int32>(static_cast<System::Byte>(25)), static_cast<System::Int32>(static_cast<System::Byte>(25)));
 			this->viewButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->viewButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13));
+			this->viewButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11));
 			this->viewButton->ForeColor = System::Drawing::Color::White;
-			this->viewButton->Location = System::Drawing::Point(3, 311);
+			this->viewButton->Location = System::Drawing::Point(3, 290);
 			this->viewButton->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->viewButton->Name = L"viewButton";
-			this->viewButton->Size = System::Drawing::Size(129, 58);
+			this->viewButton->Size = System::Drawing::Size(129, 61);
 			this->viewButton->TabIndex = 0;
 			this->viewButton->Text = L"View";
 			this->viewButton->UseVisualStyleBackColor = false;
@@ -1578,15 +1626,37 @@ private: System::Windows::Forms::Label^ label33;
 			this->viewCourse->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->viewCourse->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9));
 			this->viewCourse->ForeColor = System::Drawing::Color::White;
-			this->viewCourse->Location = System::Drawing::Point(10, 435);
+			this->viewCourse->Location = System::Drawing::Point(10, 411);
 			this->viewCourse->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->viewCourse->Name = L"viewCourse";
-			this->viewCourse->Size = System::Drawing::Size(115, 56);
+			this->viewCourse->Size = System::Drawing::Size(115, 50);
 			this->viewCourse->TabIndex = 1;
 			this->viewCourse->Text = L"Courses";
 			this->viewCourse->UseVisualStyleBackColor = true;
 			this->viewCourse->Visible = false;
 			this->viewCourse->Click += gcnew System::EventHandler(this, &mainScreen::viewCourse_Click);
+			// 
+			// scoreboardButton
+			// 
+			this->scoreboardButton->Anchor = System::Windows::Forms::AnchorStyles::Top;
+			this->scoreboardButton->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(15)), static_cast<System::Int32>(static_cast<System::Byte>(15)),
+				static_cast<System::Int32>(static_cast<System::Byte>(15)));
+			this->scoreboardButton->FlatAppearance->BorderColor = System::Drawing::Color::White;
+			this->scoreboardButton->FlatAppearance->MouseDownBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(30)),
+				static_cast<System::Int32>(static_cast<System::Byte>(30)), static_cast<System::Int32>(static_cast<System::Byte>(30)));
+			this->scoreboardButton->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(25)),
+				static_cast<System::Int32>(static_cast<System::Byte>(25)), static_cast<System::Int32>(static_cast<System::Byte>(25)));
+			this->scoreboardButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->scoreboardButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11));
+			this->scoreboardButton->ForeColor = System::Drawing::Color::White;
+			this->scoreboardButton->Location = System::Drawing::Point(3, 465);
+			this->scoreboardButton->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->scoreboardButton->Name = L"scoreboardButton";
+			this->scoreboardButton->Size = System::Drawing::Size(129, 64);
+			this->scoreboardButton->TabIndex = 0;
+			this->scoreboardButton->Text = L"Scoreboard";
+			this->scoreboardButton->UseVisualStyleBackColor = false;
+			this->scoreboardButton->Click += gcnew System::EventHandler(this, &mainScreen::scoreboardButton_Click);
 			// 
 			// viewClass
 			// 
@@ -1599,15 +1669,77 @@ private: System::Windows::Forms::Label^ label33;
 			this->viewClass->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->viewClass->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9));
 			this->viewClass->ForeColor = System::Drawing::Color::White;
-			this->viewClass->Location = System::Drawing::Point(10, 373);
+			this->viewClass->Location = System::Drawing::Point(10, 355);
 			this->viewClass->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->viewClass->Name = L"viewClass";
-			this->viewClass->Size = System::Drawing::Size(115, 58);
+			this->viewClass->Size = System::Drawing::Size(115, 52);
 			this->viewClass->TabIndex = 1;
 			this->viewClass->Text = L"Classes";
 			this->viewClass->UseVisualStyleBackColor = true;
 			this->viewClass->Visible = false;
 			this->viewClass->Click += gcnew System::EventHandler(this, &mainScreen::viewClass_Click);
+			// 
+			// importScoreboardButton
+			// 
+			this->importScoreboardButton->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->importScoreboardButton->FlatAppearance->BorderColor = System::Drawing::Color::White;
+			this->importScoreboardButton->FlatAppearance->MouseDownBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(30)),
+				static_cast<System::Int32>(static_cast<System::Byte>(30)), static_cast<System::Int32>(static_cast<System::Byte>(30)));
+			this->importScoreboardButton->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(25)),
+				static_cast<System::Int32>(static_cast<System::Byte>(25)), static_cast<System::Int32>(static_cast<System::Byte>(25)));
+			this->importScoreboardButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->importScoreboardButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9));
+			this->importScoreboardButton->ForeColor = System::Drawing::Color::White;
+			this->importScoreboardButton->Location = System::Drawing::Point(10, 533);
+			this->importScoreboardButton->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->importScoreboardButton->Name = L"importScoreboardButton";
+			this->importScoreboardButton->Size = System::Drawing::Size(115, 52);
+			this->importScoreboardButton->TabIndex = 1;
+			this->importScoreboardButton->Text = L"Import";
+			this->importScoreboardButton->UseVisualStyleBackColor = true;
+			this->importScoreboardButton->Visible = false;
+			this->importScoreboardButton->Click += gcnew System::EventHandler(this, &mainScreen::importScoreboardButton_Click);
+			// 
+			// exportScoreboardButton
+			// 
+			this->exportScoreboardButton->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->exportScoreboardButton->FlatAppearance->BorderColor = System::Drawing::Color::White;
+			this->exportScoreboardButton->FlatAppearance->MouseDownBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(30)),
+				static_cast<System::Int32>(static_cast<System::Byte>(30)), static_cast<System::Int32>(static_cast<System::Byte>(30)));
+			this->exportScoreboardButton->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(25)),
+				static_cast<System::Int32>(static_cast<System::Byte>(25)), static_cast<System::Int32>(static_cast<System::Byte>(25)));
+			this->exportScoreboardButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->exportScoreboardButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9));
+			this->exportScoreboardButton->ForeColor = System::Drawing::Color::White;
+			this->exportScoreboardButton->Location = System::Drawing::Point(10, 589);
+			this->exportScoreboardButton->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->exportScoreboardButton->Name = L"exportScoreboardButton";
+			this->exportScoreboardButton->Size = System::Drawing::Size(115, 52);
+			this->exportScoreboardButton->TabIndex = 1;
+			this->exportScoreboardButton->Text = L"Export";
+			this->exportScoreboardButton->UseVisualStyleBackColor = true;
+			this->exportScoreboardButton->Visible = false;
+			this->exportScoreboardButton->Click += gcnew System::EventHandler(this, &mainScreen::exportScoreboardButton_Click);
+			// 
+			// viewScoreboardButton
+			// 
+			this->viewScoreboardButton->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->viewScoreboardButton->FlatAppearance->BorderColor = System::Drawing::Color::White;
+			this->viewScoreboardButton->FlatAppearance->MouseDownBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(30)),
+				static_cast<System::Int32>(static_cast<System::Byte>(30)), static_cast<System::Int32>(static_cast<System::Byte>(30)));
+			this->viewScoreboardButton->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(25)),
+				static_cast<System::Int32>(static_cast<System::Byte>(25)), static_cast<System::Int32>(static_cast<System::Byte>(25)));
+			this->viewScoreboardButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->viewScoreboardButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9));
+			this->viewScoreboardButton->ForeColor = System::Drawing::Color::White;
+			this->viewScoreboardButton->Location = System::Drawing::Point(10, 645);
+			this->viewScoreboardButton->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->viewScoreboardButton->Name = L"viewScoreboardButton";
+			this->viewScoreboardButton->Size = System::Drawing::Size(115, 52);
+			this->viewScoreboardButton->TabIndex = 1;
+			this->viewScoreboardButton->Text = L"View";
+			this->viewScoreboardButton->UseVisualStyleBackColor = true;
+			this->viewScoreboardButton->Visible = false;
 			// 
 			// schoolYearPanel
 			// 
@@ -2718,6 +2850,166 @@ private: System::Windows::Forms::Label^ label33;
 			this->columnHeader6->Text = L"Social ID";
 			this->columnHeader6->Width = 78;
 			// 
+			// importPanel
+			// 
+			this->importPanel->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->importPanel->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
+			this->importPanel->Controls->Add(this->ImportButton);
+			this->importPanel->Controls->Add(this->button9);
+			this->importPanel->Controls->Add(this->courseBox);
+			this->importPanel->Controls->Add(this->label35);
+			this->importPanel->Location = System::Drawing::Point(147, 133);
+			this->importPanel->Name = L"importPanel";
+			this->importPanel->Size = System::Drawing::Size(636, 534);
+			this->importPanel->TabIndex = 16;
+			this->importPanel->Visible = false;
+			// 
+			// ImportButton
+			// 
+			this->ImportButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
+			this->ImportButton->BackColor = System::Drawing::Color::DarkGoldenrod;
+			this->ImportButton->FlatAppearance->BorderColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(20)),
+				static_cast<System::Int32>(static_cast<System::Byte>(20)), static_cast<System::Int32>(static_cast<System::Byte>(20)));
+			this->ImportButton->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Gold;
+			this->ImportButton->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Goldenrod;
+			this->ImportButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->ImportButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->ImportButton->ForeColor = System::Drawing::Color::Black;
+			this->ImportButton->Location = System::Drawing::Point(341, 458);
+			this->ImportButton->Name = L"ImportButton";
+			this->ImportButton->Size = System::Drawing::Size(124, 39);
+			this->ImportButton->TabIndex = 26;
+			this->ImportButton->Text = L"Import";
+			this->ImportButton->UseVisualStyleBackColor = false;
+			this->ImportButton->Click += gcnew System::EventHandler(this, &mainScreen::ImportButton_Click);
+			// 
+			// button9
+			// 
+			this->button9->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
+			this->button9->BackColor = System::Drawing::Color::White;
+			this->button9->FlatAppearance->BorderColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(5)),
+				static_cast<System::Int32>(static_cast<System::Byte>(5)), static_cast<System::Int32>(static_cast<System::Byte>(5)));
+			this->button9->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Gray;
+			this->button9->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Silver;
+			this->button9->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button9->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->button9->ForeColor = System::Drawing::Color::Black;
+			this->button9->Location = System::Drawing::Point(487, 456);
+			this->button9->Name = L"button9";
+			this->button9->Size = System::Drawing::Size(122, 39);
+			this->button9->TabIndex = 25;
+			this->button9->Text = L"Close";
+			this->button9->UseVisualStyleBackColor = false;
+			this->button9->Click += gcnew System::EventHandler(this, &mainScreen::button9_Click);
+			// 
+			// courseBox
+			// 
+			this->courseBox->DropDownHeight = 80;
+			this->courseBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->courseBox->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->courseBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Pixel));
+			this->courseBox->ForeColor = System::Drawing::Color::Black;
+			this->courseBox->FormattingEnabled = true;
+			this->courseBox->IntegralHeight = false;
+			this->courseBox->Location = System::Drawing::Point(28, 84);
+			this->courseBox->Name = L"courseBox";
+			this->courseBox->Size = System::Drawing::Size(584, 24);
+			this->courseBox->Sorted = true;
+			this->courseBox->TabIndex = 12;
+			// 
+			// label35
+			// 
+			this->label35->AutoSize = true;
+			this->label35->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13));
+			this->label35->ForeColor = System::Drawing::Color::White;
+			this->label35->Location = System::Drawing::Point(23, 41);
+			this->label35->Name = L"label35";
+			this->label35->Size = System::Drawing::Size(82, 26);
+			this->label35->TabIndex = 11;
+			this->label35->Text = L"Course";
+			// 
+			// ExportScoreboardPanel
+			// 
+			this->ExportScoreboardPanel->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->ExportScoreboardPanel->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
+			this->ExportScoreboardPanel->Controls->Add(this->exportCourseStudButton);
+			this->ExportScoreboardPanel->Controls->Add(this->button10);
+			this->ExportScoreboardPanel->Controls->Add(this->exportCourseBox);
+			this->ExportScoreboardPanel->Controls->Add(this->label36);
+			this->ExportScoreboardPanel->Location = System::Drawing::Point(147, 133);
+			this->ExportScoreboardPanel->Name = L"ExportScoreboardPanel";
+			this->ExportScoreboardPanel->Size = System::Drawing::Size(637, 534);
+			this->ExportScoreboardPanel->TabIndex = 17;
+			this->ExportScoreboardPanel->Visible = false;
+			// 
+			// exportCourseStudButton
+			// 
+			this->exportCourseStudButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
+			this->exportCourseStudButton->BackColor = System::Drawing::Color::DarkGoldenrod;
+			this->exportCourseStudButton->FlatAppearance->BorderColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(20)),
+				static_cast<System::Int32>(static_cast<System::Byte>(20)), static_cast<System::Int32>(static_cast<System::Byte>(20)));
+			this->exportCourseStudButton->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Gold;
+			this->exportCourseStudButton->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Goldenrod;
+			this->exportCourseStudButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->exportCourseStudButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.2F, System::Drawing::FontStyle::Bold,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+			this->exportCourseStudButton->ForeColor = System::Drawing::Color::Black;
+			this->exportCourseStudButton->Location = System::Drawing::Point(294, 458);
+			this->exportCourseStudButton->Name = L"exportCourseStudButton";
+			this->exportCourseStudButton->Size = System::Drawing::Size(171, 39);
+			this->exportCourseStudButton->TabIndex = 28;
+			this->exportCourseStudButton->Text = L"Export to...";
+			this->exportCourseStudButton->UseVisualStyleBackColor = false;
+			this->exportCourseStudButton->Click += gcnew System::EventHandler(this, &mainScreen::exportCourseStudButton_Click);
+			// 
+			// button10
+			// 
+			this->button10->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
+			this->button10->BackColor = System::Drawing::Color::White;
+			this->button10->FlatAppearance->BorderColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(5)),
+				static_cast<System::Int32>(static_cast<System::Byte>(5)), static_cast<System::Int32>(static_cast<System::Byte>(5)));
+			this->button10->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Gray;
+			this->button10->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Silver;
+			this->button10->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button10->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->button10->ForeColor = System::Drawing::Color::Black;
+			this->button10->Location = System::Drawing::Point(489, 456);
+			this->button10->Name = L"button10";
+			this->button10->Size = System::Drawing::Size(122, 39);
+			this->button10->TabIndex = 27;
+			this->button10->Text = L"Close";
+			this->button10->UseVisualStyleBackColor = false;
+			this->button10->Click += gcnew System::EventHandler(this, &mainScreen::button10_Click);
+			// 
+			// exportCourseBox
+			// 
+			this->exportCourseBox->DropDownHeight = 80;
+			this->exportCourseBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->exportCourseBox->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->exportCourseBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Pixel));
+			this->exportCourseBox->ForeColor = System::Drawing::Color::Black;
+			this->exportCourseBox->FormattingEnabled = true;
+			this->exportCourseBox->IntegralHeight = false;
+			this->exportCourseBox->Location = System::Drawing::Point(29, 84);
+			this->exportCourseBox->Name = L"exportCourseBox";
+			this->exportCourseBox->Size = System::Drawing::Size(584, 24);
+			this->exportCourseBox->Sorted = true;
+			this->exportCourseBox->TabIndex = 14;
+			// 
+			// label36
+			// 
+			this->label36->AutoSize = true;
+			this->label36->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13));
+			this->label36->ForeColor = System::Drawing::Color::White;
+			this->label36->Location = System::Drawing::Point(24, 41);
+			this->label36->Name = L"label36";
+			this->label36->Size = System::Drawing::Size(82, 26);
+			this->label36->TabIndex = 13;
+			this->label36->Text = L"Course";
+			// 
 			// mainScreen
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
@@ -2727,6 +3019,12 @@ private: System::Windows::Forms::Label^ label33;
 			this->ClientSize = System::Drawing::Size(885, 767);
 			this->Controls->Add(this->menuPanel);
 			this->Controls->Add(this->staffPanel);
+			this->Controls->Add(this->ExportScoreboardPanel);
+			this->Controls->Add(this->importPanel);
+			this->Controls->Add(this->classPanel);
+			this->Controls->Add(this->schoolYearPanel);
+			this->Controls->Add(this->viewClassPanel);
+			this->Controls->Add(this->viewCoursePanel);
 			this->Controls->Add(this->viewOneCourseStudPanel);
 			this->Controls->Add(this->coursePanel);
 			this->Controls->Add(this->viewStudentPanel);
@@ -2734,10 +3032,6 @@ private: System::Windows::Forms::Label^ label33;
 			this->Controls->Add(this->studentPanel);
 			this->Controls->Add(this->profilePanel);
 			this->Controls->Add(this->changePassPanel);
-			this->Controls->Add(this->classPanel);
-			this->Controls->Add(this->schoolYearPanel);
-			this->Controls->Add(this->viewClassPanel);
-			this->Controls->Add(this->viewCoursePanel);
 			this->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->MinimumSize = System::Drawing::Size(903, 814);
 			this->Name = L"mainScreen";
@@ -2779,6 +3073,10 @@ private: System::Windows::Forms::Label^ label33;
 			this->viewCoursePanel->ResumeLayout(false);
 			this->viewOneCourseStudPanel->ResumeLayout(false);
 			this->viewOneCourseStudPanel->PerformLayout();
+			this->importPanel->ResumeLayout(false);
+			this->importPanel->PerformLayout();
+			this->ExportScoreboardPanel->ResumeLayout(false);
+			this->ExportScoreboardPanel->PerformLayout();
 			this->ResumeLayout(false);
 
 		}
@@ -2807,6 +3105,8 @@ private: System::Windows::Forms::Label^ label33;
 			if (viewStudentPanel->Visible) viewStudentClass->Hide();
 			if (viewCoursePanel->Visible) viewCoursePanel->Hide();
 			if (viewOneCourseStudPanel->Visible) viewOneCourseStudPanel->Hide();
+			if (importPanel->Visible) importPanel->Hide();
+			if (ExportScoreboardPanel->Visible) ExportScoreboardPanel->Hide();
 		}
 
 	private:
@@ -3705,12 +4005,155 @@ private: System::Windows::Forms::Label^ label33;
 			addCourseStudent(curCourse, newStud, curSList);
 			addOneCourseStudID->Text = "";
 			viewOneCourseStudButton->PerformClick();
+
+			MessageBox::Show("Student added!", "", MessageBoxButtons::OK, MessageBoxIcon::Asterisk);
 		}
 
 	private: 
 		System::Void addOneCourseStudID_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
 			if (e->KeyValue == (int)Keys::Enter || e->KeyValue == (int)Keys::Tab)
 				addOneCourseStudButton->PerformClick();
+		}
+
+	private: 
+		System::Void scoreboardButton_Click(System::Object^ sender, System::EventArgs^ e) {
+			if (!importScoreboardButton->Visible) {
+				importScoreboardButton->Show();
+				exportScoreboardButton->Show();
+				viewScoreboardButton->Show();
+			}
+			else {
+				importScoreboardButton->Hide();
+				exportScoreboardButton->Hide();
+				viewScoreboardButton->Hide();
+			}
+		}
+
+	private:
+		void fillCourseBox() {
+			courseBox->Items->Clear();
+			exportCourseBox->Items->Clear();
+			SchoolYear* curYear = schoolYearList;
+			while (curYear)
+			{
+				Semester* curSemester = curYear->semesters;
+				for (int i = 0; i < curYear->numOfSemester; i++)
+				{
+					Course* curCourse = curSemester->p_CourseList;
+					for (int i = 0; i < curSemester->numOfCourse; i++)
+					{
+						courseBox->Items->Add(convertString(curCourse->courseID));
+						exportCourseBox->Items->Add(convertString(curCourse->courseID));
+						curCourse = curCourse->pNext;
+					}
+					curSemester = curSemester->p_Next_Semester;
+				}
+				curYear = curYear->pNext;
+			}
+		}
+
+	private: 
+		System::Void importScoreboardButton_Click(System::Object^ sender, System::EventArgs^ e) {
+			if (!importPanel->Visible) {
+				hideAll();
+				menuPanel->Show();
+				importPanel->Show();
+				fillCourseBox();
+			}
+		}
+
+
+	private: 
+		System::Void button9_Click(System::Object^ sender, System::EventArgs^ e) {
+			importPanel->Hide();
+		}
+
+	private: 
+		System::Void ImportButton_Click(System::Object^ sender, System::EventArgs^ e) {
+			if (courseBox->Text == "") {
+				MessageBox::Show("Plese select a course!", "", MessageBoxButtons::OK, MessageBoxIcon::Error);
+				return;
+			}
+
+			SchoolYear* curYear = schoolYearList;
+			Semester* curSemester = nullptr;
+			Course* curCourse = nullptr;
+			string courseID = convertToString(courseBox->Text);
+
+			while (curYear)
+			{
+				curSemester = curYear->semesters;
+				for (int i = 0; i < curYear->numOfSemester; i++)
+				{
+					curCourse = takeCourse(curSemester->p_CourseList, courseID);
+					if (curCourse) break;
+					curSemester = curSemester->p_Next_Semester;
+				}
+				if (curCourse) break;
+				curYear = curYear->pNext;
+			}
+
+			System::IO::Stream^ myStream;
+			OpenFileDialog^ file = gcnew OpenFileDialog;
+			file->Filter = "CSV files (*.csv)|*.csv";
+
+			if (file->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+				if ((myStream = file->OpenFile()) != nullptr) {
+					String^ fileName = file->InitialDirectory + file->FileName;
+					importScoreboard(curCourse, convertToString(fileName));
+				}
+				myStream->Close();
+				MessageBox::Show("Scoreboard imported", "", MessageBoxButtons::OK, MessageBoxIcon::Asterisk);
+			}
+		}
+	
+	private: 
+		System::Void button10_Click(System::Object^ sender, System::EventArgs^ e) {
+			ExportScoreboardPanel->Hide();
+		}
+	
+	private: 
+		System::Void exportScoreboardButton_Click(System::Object^ sender, System::EventArgs^ e) {
+			if (!ExportScoreboardPanel->Visible) {
+				hideAll();
+				menuPanel->Show();
+				ExportScoreboardPanel->Show();
+				fillCourseBox();
+			}
+		}
+
+
+	private: 
+		System::Void exportCourseStudButton_Click(System::Object^ sender, System::EventArgs^ e) {
+			if (exportCourseBox->Text == "") {
+				MessageBox::Show("Plese select a course!", "", MessageBoxButtons::OK, MessageBoxIcon::Error);
+				return;
+			}
+
+			SchoolYear* curYear = schoolYearList;
+			Semester* curSemester = nullptr;
+			Course* curCourse = nullptr;
+			string courseID = convertToString(exportCourseBox->Text);
+
+			while (curYear)
+			{
+				curSemester = curYear->semesters;
+				for (int i = 0; i < curYear->numOfSemester; i++)
+				{
+					curCourse = takeCourse(curSemester->p_CourseList, courseID);
+					if (curCourse) break;
+					curSemester = curSemester->p_Next_Semester;
+				}
+				if (curCourse) break;
+				curYear = curYear->pNext;
+			}
+
+			FolderBrowserDialog^ folder = gcnew FolderBrowserDialog;
+
+			if (folder->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+				exportStudent(curCourse, convertToString(folder->SelectedPath) + "/" + curCourse->courseID + "StudentList.csv");
+				MessageBox::Show("Successfully exported student list of this course", "", MessageBoxButtons::OK, MessageBoxIcon::Asterisk);
+			}
 		}
 };
 }
