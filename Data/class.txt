@@ -30,14 +30,14 @@ Male
 22CLC02
 2
 1
-22127100
+22127200
 Chien
 Duong Van
 Male
 5 6 2004
 123654789
 2
-22127101
+22127201
 Mai
 Ly Thi
 Female
@@ -46,6 +46,34 @@ Female
 22CLC03
 0
 22CLC04
-0
+3
+1
+21127001
+Anh
+Nguyen Bao
+Male
+19 2 2003
+126511213
+2
+21127002
+Ngoc
+Pham Ngoc
+Female
+8 11 2003
+41111218
+3
+21127003
+Cuong
+Nguyen Quoc
+Male
+6 6 2003
+45515515
 23CLC01
-0
+1
+1
+21127004
+Bich Huong
+Do
+Male
+13 5 2003
+963258741
