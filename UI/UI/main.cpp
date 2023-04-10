@@ -4,6 +4,7 @@
 #include "loginScreen.h"
 #include "mainScreen.h"
 #include "schoolYear.h"
+#include "scoreboard.h"
 
 using namespace std;
 using namespace System;
