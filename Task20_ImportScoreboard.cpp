@@ -44,16 +44,16 @@ void Input_ScoreboardOfCourse_FromFile(ifstream& Scoreboard, Course*& Cour){
         Stu->fullname = Stu->lastName + " " + Stu->firstName;
 
         getline(Scoreboard, tmp, ',');
-        Stu->finalMark = stoi(tmp);
+        Stu->finalMark = stof(tmp);
 
         getline(Scoreboard, tmp, ',');
-        Stu->midtermMark = stoi(tmp);
+        Stu->midtermMark = stof(tmp);
 
         getline(Scoreboard, tmp, ',');
-        Stu->otherMark = stoi(tmp);
+        Stu->otherMark = stof(tmp);
 
         getline(Scoreboard, tmp, '\n');
-        Stu->totalMark = stoi(tmp);
+        Stu->totalMark = stof(tmp);
 
         count++;
         Stu->pNext = nullptr;

@@ -11,7 +11,7 @@ void ExportListOfStudsInACourse(ofstream& ListOfStuds, Course* Cour){
     ListOfStuds << "Course ID: " << Cour->courseID << endl;
     ListOfStuds << "Course name: " << Cour->courseName << endl;
     ListOfStuds << "Teacher's name: " << Cour->teacherName << endl;
-    ListOfStuds << "Student's ID, Name," << endl;
+    ListOfStuds << "No, Student's ID, Name," << endl;
 
     Student* Stu = Cour->Studs;
     int i = 1;

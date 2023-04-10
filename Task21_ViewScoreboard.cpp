@@ -3,8 +3,8 @@
 void ViewScoreboardOf1Course(Course* cour){
     Student* Stu = cour->Studs;
     // neu k co course name hay class name thi se k chay dc
-    cout << "Scoreboard Of "; // << cour->courseName << "- Class " << cour->className << endl;
-    cout << "--------------------------------------------------------------------------------------------------" << endl;
+    cout << "Scoreboard Of "; // << cour->courseName << "- Class " << cour->className;
+    cout << "\n--------------------------------------------------------------------------------------------------" << endl;
     cout << "| " << setw(5) << left << "No"
         << "| " << setw(12) << left << "Student ID"
         << "| " << setw(25) << left << "Full name"
