@@ -163,10 +163,30 @@ void get_Semester_Data(Semester* p_Semester)
 		std::cout << " \n";
 		std::cout << "End date: " << p_Semester->end_date.day << " " << p_Semester->end_date.month << " " << p_Semester->end_date.year;
 		std::cout << " \n";
-		get_Course_Data(p_Semester->p_CourseList);
+		std::cout << "_________________________________\n";
+		get_All_Course_Data(p_Semester->p_CourseList);
 		p_Semester = p_Semester->p_Next_Semester;
 
 	}
+}
+void get_A_Semester_Data(Semester* p_Semester)
+{
+	std::cout << "Semester: " << p_Semester->semester_num;
+	std::cout << " \n";
+	std::cout << "School year: \n";
+	std::cout << "Start year: ";
+	std::cout << p_Semester->startYear;
+	std::cout << "\n";
+	std::cout << "End year: ";
+	std::cout << p_Semester->endYear;
+	std::cout << "\n";
+	std::cout << "Date (dd mm yyyy): \n";
+	std::cout << "Start date: " << p_Semester->start_date.day << " " << p_Semester->start_date.month << " " << p_Semester->start_date.year;
+	std::cout << " \n";
+	std::cout << "End date: " << p_Semester->end_date.day << " " << p_Semester->end_date.month << " " << p_Semester->end_date.year;
+	std::cout << " \n";
+	std::cout << "_________________________________\n";
+	get_All_Course_Data(p_Semester->p_CourseList);
 }
 Semester* goto_Semester_numth(Semester* p_Semester, unsigned short semester_numth)
 {
@@ -228,6 +248,7 @@ void add_Course(Course*& p_Course)
 }
 void set_Course_Data(Course*& p_Course)
 {
+	
 	std::cout << "Course id: ";
 	getline(std::cin, p_Course->courseID);
 	std::cout << "\n";
@@ -260,11 +281,28 @@ void set_Course_Data(Course*& p_Course)
 
 	std::cout << "\n";
 }
-void get_Course_Data(Course* p_Course)
+void get_A_Course_Data(Course* p_Course)
+{
+	std::cout << "\nCourse id: " << p_Course->courseID;
+	std::cout << "\n";
+	std::cout << "Course name: " << p_Course->courseName;
+	std::cout << "\n";
+	std::cout << "Class name: " << p_Course->className;
+	std::cout << "\n";
+	std::cout << "Teacher name: " << p_Course->teacherName;
+	std::cout << "\n";
+	std::cout << "Number of credit(s): " << p_Course->credits;
+	std::cout << "\n";
+	std::cout << "Day of week: " << p_Course->dayOfWeek;
+	std::cout << "\n";
+	std::cout << "Session: " << p_Course->session;
+	std::cout << "_________________________________\n";
+}
+void get_All_Course_Data(Course* p_Course)
 {
 	while (p_Course != nullptr)
 	{
-		std::cout << "Course id: " << p_Course->courseID;
+		/*std::cout << "\nCourse id: " << p_Course->courseID;
 		std::cout << "\n";
 
 		std::cout << "Course name: " << p_Course->courseName;
@@ -283,7 +321,9 @@ void get_Course_Data(Course* p_Course)
 		std::cout << "\n";
 
 		std::cout << "Session: " << p_Course->session;
-		std::cout << "\n";
+		std::cout << "_________________________________\n";*/
+
+		get_A_Course_Data(p_Course);
 		p_Course = p_Course->pNext;
 
 	}
@@ -492,6 +532,7 @@ void add_Course_To_Student(Course* p_Course_list, Student*& student)
 }
 void delete_All_Student(Student*& p_Student_List)
 {
+	if(p_Student_List == nullptr) return;
 	Student* cur = p_Student_List;
 	while (p_Student_List != nullptr)
 	{

@@ -25,7 +25,7 @@ struct Student
 	Time dateOfBirth;
 	std::string socialID;
 	int totalMark, finalMark, midtermMark, otherMark;
-	Student* pNext;
+	Student* pNext = nullptr;
 	Course* pCourseList = nullptr;
 
 };
@@ -76,12 +76,14 @@ void set_Semster_Data(Semester*& p_Semester, unsigned short num, int startYear, 
 void add_Semester(Semester*& p_Semester);
 void add_Semester(Semester*& p_Semester, unsigned short num, int startYear, int endYear, std::string start_date, std::string end_date);
 void get_Semester_Data(Semester* p_Semester);
+void get_A_Semester_Data(Semester* p_Semester);
 void delete_All_Semester(Semester*& p_Semester);
 
 //courses protype
 void add_Course(Course*& p_Course);
 void set_Course_Data(Course*& p_Course);
-void get_Course_Data(Course* p_Course);
+void get_All_Course_Data(Course* p_Course);
+void get_A_Course_Data(Course* p_Course);
 void add_Course_To_Student(Course* p_Course_list, Student*& student);
 void remove_Course_From_Student(Course*& pCourse, Student*& pStudent);
 void delete_All_Course(Course*& p_Course);
