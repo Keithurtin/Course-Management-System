@@ -55,6 +55,7 @@ void add_Semester(Semester*& p_Semester, unsigned short num, int startYear, int 
 }
 void set_Semster_Data(Semester*& p_Semester)
 {
+	if(p_Semester == nullptr)		return;
 	std::cout << "Semester no: ";
 	std::cin >> p_Semester->semester_num;
 	std::cout << "\n";
@@ -141,9 +142,9 @@ void set_Semster_Data(Semester*& p_Semester, unsigned short num, int startYear, 
 
 
 }
-void get_Semester_Data(Semester* p_Semester)
+void get_All_Semester_Data(Semester* p_Semester)
 {
-
+	if(p_Semester == nullptr)		return;
 	while (p_Semester != nullptr)
 	{
 		std::cout << "Semester: " << p_Semester->semester_num;
@@ -171,6 +172,7 @@ void get_Semester_Data(Semester* p_Semester)
 }
 void get_A_Semester_Data(Semester* p_Semester)
 {
+	if(p_Semester == nullptr)		return;
 	std::cout << "Semester: " << p_Semester->semester_num;
 	std::cout << " \n";
 	std::cout << "School year: \n";
@@ -217,6 +219,31 @@ void delete_All_Semester(Semester*& p_Semester)
 		p_Semester = phead;
 	}
 }
+void save_Semester_Data_To_File(Semester* p_Semester, std::string file_name)
+{
+	std::ofstream semester;
+	semester.open(file_name, std::ios::out);
+	if (semester.is_open())
+	{
+		while (p_Semester != nullptr)
+		{
+			semester << p_Semester->semester_num << " ";
+			semester << p_Semester->startYear << " ";
+			semester << p_Semester->endYear << " ";
+			semester << p_Semester->start_date.day << " ";
+			semester << p_Semester->start_date.month << " ";
+			semester << p_Semester->start_date.year << " ";
+			semester << p_Semester->end_date.day << " ";
+			semester << p_Semester->end_date.month << " ";
+			semester << p_Semester->end_date.year << " ";
+			semester << "\n";
+			p_Semester = p_Semester->p_Next_Semester;
+		}
+	}
+	semester.close();
+}
+
+
 
 //course funtion////////////////////////////////////////////////
 void add_Course(Course*& p_Course)
@@ -248,7 +275,7 @@ void add_Course(Course*& p_Course)
 }
 void set_Course_Data(Course*& p_Course)
 {
-	
+	if(p_Course == nullptr) return;
 	std::cout << "Course id: ";
 	getline(std::cin, p_Course->courseID);
 	std::cout << "\n";
@@ -283,6 +310,7 @@ void set_Course_Data(Course*& p_Course)
 }
 void get_A_Course_Data(Course* p_Course)
 {
+	if(p_Course == nullptr) return;
 	std::cout << "\nCourse id: " << p_Course->courseID;
 	std::cout << "\n";
 	std::cout << "Course name: " << p_Course->courseName;
@@ -300,32 +328,12 @@ void get_A_Course_Data(Course* p_Course)
 }
 void get_All_Course_Data(Course* p_Course)
 {
+	if (p_Course == nullptr)	return;
+
 	while (p_Course != nullptr)
 	{
-		/*std::cout << "\nCourse id: " << p_Course->courseID;
-		std::cout << "\n";
-
-		std::cout << "Course name: " << p_Course->courseName;
-		std::cout << "\n";
-
-		std::cout << "Class name: " << p_Course->className;
-		std::cout << "\n";
-
-		std::cout << "Teacher name: " << p_Course->teacherName;
-		std::cout << "\n";
-
-		std::cout << "Number of credit(s): " << p_Course->credits;
-		std::cout << "\n";
-
-		std::cout << "Day of week: " << p_Course->dayOfWeek;
-		std::cout << "\n";
-
-		std::cout << "Session: " << p_Course->session;
-		std::cout << "_________________________________\n";*/
-
 		get_A_Course_Data(p_Course);
 		p_Course = p_Course->pNext;
-
 	}
 }
 void delete_All_Course(Course*& p_Course)
@@ -337,7 +345,27 @@ void delete_All_Course(Course*& p_Course)
 		p_Course = phead;
 	}
 }
-
+void save_Course_Data_To_File(Course* p_Course, std::string file_name)
+{
+	std::ofstream course;
+	course.open(file_name, std::ios::out);
+	if (course.is_open())
+	{
+		while (p_Course != nullptr)
+		{
+			course << p_Course->courseID << " ";
+			course << p_Course->courseName << " ";
+			course << p_Course->className << " ";
+			course << p_Course->teacherName << " ";
+			course << p_Course->credits << " ";
+			course << p_Course->dayOfWeek << " ";
+			course << p_Course->session << " ";
+			course << "\n";
+			p_Course = p_Course->pNext;
+		}
+	}
+	course.close();
+}
 
 //student function////////////////////////////////////////////
 void add_Student_Data_From_File(std::string student_list, Course* p_Course, Student*& p_Student_list)
@@ -408,6 +436,25 @@ void add_Student_Data_From_File(std::string student_list, Course* p_Course, Stud
 	In_Student_List.close();
 
 }
+void add_Course_To_Student(Course* p_Course_list, Student*& student)
+{
+	if (p_Course_list == nullptr) return;
+
+	Course* nCourse = new Course;
+	nCourse->pNext = nullptr;
+	*(nCourse) = *(p_Course_list);
+
+	if (student->pCourseList == nullptr)
+	{
+		student->pCourseList = nCourse;
+		return;
+	}
+
+	Course* cur = student->pCourseList;
+	while (cur->pNext != nullptr)
+		cur = cur->pNext;
+	cur->pNext= nCourse;
+}
 void add_Student_To_Course(Course* p_Course, Student*& p_Student_list)
 {
 	if (p_Course == nullptr) return;
@@ -458,6 +505,7 @@ void add_Student_To_Course(Course* pCourse, Student*& p_Student_list, Student& n
 }
 void set_Student_Data(Student*& p_Student_list)
 {
+	if(p_Student_list == nullptr) return;
 	std::cout << " Student No: ";
 	std::cin >> p_Student_list->No;
 	std::cout << "\n";
@@ -485,50 +533,33 @@ void set_Student_Data(Student*& p_Student_list)
 	getline(std::cin, p_Student_list->socialID);
 	std::cout << "\n";
 }
-void get_Student_Data(Student* p_Student_list)
+void get_A_Student_Data(Student* p_Student_list)
 {
+	if(p_Student_list == nullptr) return;
+	std::cout << "No: " << p_Student_list->No << "\n";
+	std::cout << "Student ID: " << p_Student_list->studentID << "\n";
+	std::cout << "First name: " << p_Student_list->firstName << "\n";
+	std::cout << "Last name: " << p_Student_list->lastName << "\n";
+	std::cout << "Gender: " << p_Student_list->gender << "\n";
+	std::cout << "Date of birth: " << p_Student_list->dateOfBirth.day;
+	std::cout << " " << p_Student_list->dateOfBirth.month;
+	std::cout << " " << p_Student_list->dateOfBirth.year << "\n";
+	std::cout << "Social ID: " << p_Student_list->socialID << "\n";
+	if (p_Student_list->pCourseList != nullptr)
+	{
+		std::cout << "all course of student: \n";
+		get_All_Course_Data(p_Student_list->pCourseList);
+	}
+}
+void get_All_Student_Data(Student* p_Student_list)
+{
+	if(p_Student_list == nullptr) return;
 	while (p_Student_list != nullptr)
 	{
-		std::cout << "No: " << p_Student_list->No << "\n";
-		std::cout << "Student ID: " << p_Student_list->studentID << "\n";
-		std::cout << "First name: " << p_Student_list->firstName << "\n";
-		std::cout << "Last name: " << p_Student_list->lastName << "\n";
-		std::cout << "Gender: " << p_Student_list->gender << "\n";
-		std::cout << "Date of birth: " << p_Student_list->dateOfBirth.day;
-		std::cout << " " << p_Student_list->dateOfBirth.month;
-		std::cout << " " << p_Student_list->dateOfBirth.year << "\n";
-		std::cout << "Social ID: " << p_Student_list->socialID << "\n";
-		if (p_Student_list->pCourseList != nullptr)
-			std::cout << "Course ID:" << p_Student_list->pCourseList->courseID << "\n";
+		get_A_Student_Data(p_Student_list);
 		p_Student_list = p_Student_list->pNext;
 	}
 
-}
-Student* goto_Student_number(Student* p_Student_List, unsigned int student_idx)
-{
-	if (p_Student_List == nullptr) return nullptr;
-	for (unsigned int cur_student = 1; cur_student < student_idx; cur_student++)
-		p_Student_List = p_Student_List->pNext;
-	return p_Student_List;
-}
-void add_Course_To_Student(Course* p_Course_list, Student*& student)
-{
-	if (p_Course_list == nullptr) return;
-
-	Course* nCourse = new Course;
-	nCourse->pNext = nullptr;
-	*(nCourse) = *(p_Course_list);
-
-	if (student->pCourseList == nullptr)
-	{
-		student->pCourseList = nCourse;
-		return;
-	}
-
-	Course* cur = student->pCourseList;
-	while (cur->pNext != nullptr)
-		cur = cur->pNext;
-	cur->pNext= nCourse;
 }
 void delete_All_Student(Student*& p_Student_List)
 {
@@ -541,55 +572,67 @@ void delete_All_Student(Student*& p_Student_List)
 		delete cur;
 	}
 }
-void remove_Student_From_Course(Course*& pCourse, Student*& pStudent)
+void remove_A_Course_From_Student(Student*& pStudent, std::string delCourseID)
 {
-	if (pCourse == nullptr || pCourse->Studs == nullptr || pStudent == nullptr) return;
-
-	Course* curCourse = pCourse;
-	Student* curStudent = pStudent;
-	while (curCourse->Studs && curCourse->Studs->pNext->studentID != curStudent->studentID)
-	{
-		curCourse->Studs = curCourse->Studs->pNext;
-	}
-
-	if (!curCourse->Studs) return;
-
-	Student* delStudent = curCourse->Studs->pNext;
-
-	curCourse->Studs->pNext = delStudent->pNext;
-
-	remove_Course_From_Student(curCourse, delStudent);
-	delete delStudent;
-
-
-}
-void remove_Course_From_Student(Course*& pCourse, Student*& pStudent)
-{
-	if (pStudent->pCourseList == nullptr || pCourse == nullptr) return;
-
-	Course* cCourse = pCourse;
+	if (pStudent == nullptr) return;
 	Student* cStudent = pStudent;
-
-	while (cStudent->pCourseList && cStudent->pCourseList->pNext->courseID != cCourse->courseID)
+	while (cStudent && cStudent->pCourseList && cStudent->pCourseList->courseID != delCourseID)
 	{
-		cStudent->pCourseList = cStudent->pCourseList->pNext;
+		cStudent = cStudent->pNext;
+	}
+	if (!cStudent || !cStudent->pCourseList) return;
+	Course* delCourse = cStudent->pCourseList;
+	cStudent->pCourseList = delCourse->pNext;
+	delete delCourse;
+}
+void remove_A_Student_From_Course(Course*& pCourse, std::string delStudentID)
+{
+	if (pCourse == nullptr || pCourse->Studs == nullptr ) return;
+	Student* cStudent = pCourse->Studs;
+	while (cStudent->pNext && cStudent->pNext->studentID != delStudentID)
+	{
+		cStudent = cStudent->pNext;
+	}
+	if (!cStudent->pNext) return;
+	Student* delStudent = cStudent->pNext;
+	cStudent->pNext = delStudent->pNext;
+	remove_A_Course_From_Student(delStudent, pCourse->courseID);
+	delete delStudent;
+}
+void remove_All_Course_From_Student(Student*& pStudent)
+{
+	if (pStudent->pCourseList == nullptr ) return;
+
+
+	while (pStudent->pCourseList) 
+	{
+		Course* cCourse = pStudent->pCourseList;
+		pStudent->pCourseList = pStudent->pCourseList->pNext;
+		delete cCourse;
 	}
 
-	if (!cStudent->pCourseList) return;
+}
+void remove_All_Student_From_Course(Course*& pCourse)
+{
+	if (pCourse == nullptr || pCourse->Studs == nullptr ) return;
 
-	Course* delCourse = cStudent->pCourseList->pNext;
-	cStudent->pCourseList->pNext = delCourse->pNext;
-	delete delCourse;
+	while (pCourse->Studs) 
+	{
+		Student* cStudent = pCourse->Studs;
+		pCourse->Studs = pCourse->Studs->pNext;
+		remove_A_Course_From_Student(cStudent, pCourse->courseID);
+		delete cStudent;
+	}
+
 
 }
-void deleteCourse(Semester*& pSemester, Course* pCourse)
+void deleteCourse(Semester*& pSemester, std::string delCourseID)
 {
-	if (pSemester == nullptr || pCourse == nullptr) return;
+	if (pSemester == nullptr ) return;
 
 	Semester* cSemester = pSemester;
-	Course* cCourse = pCourse;
 
-	while (cSemester->p_CourseList && cSemester->p_CourseList->pNext->courseID != cCourse->courseID)
+	while (cSemester->p_CourseList && cSemester->p_CourseList->pNext->courseID != delCourseID)
 	{
 		cSemester->p_CourseList = cSemester->p_CourseList->pNext;
 	}
