@@ -9,7 +9,7 @@
 #include "schoolYear.h"
 #include "scoreboard.h"
 
-namespace UI {
+namespace CoursesManagementSystem {
 
 	using namespace System;
 	using namespace System::ComponentModel;

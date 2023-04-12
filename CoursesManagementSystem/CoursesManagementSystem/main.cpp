@@ -5,6 +5,7 @@
 #include "mainScreen.h"
 #include "schoolYear.h"
 #include "scoreboard.h"
+#include "ImportScoreboard.h"
 
 using namespace std;
 using namespace System;
@@ -30,8 +31,8 @@ using namespace System::Windows::Forms;
 	//
 	while (true)
 	{
-		UI::loginScreen loginForm;
-		UI::mainScreen mainForm;
+		CoursesManagementSystem::loginScreen loginForm;
+		CoursesManagementSystem::mainScreen mainForm;
 		loginForm.getData(accountList);
 		Application::Run(% loginForm);
 		curAccount = loginForm.curAccount;

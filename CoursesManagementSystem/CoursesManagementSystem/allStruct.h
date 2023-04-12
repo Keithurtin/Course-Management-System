@@ -30,7 +30,7 @@ struct Student
 	string gender;
 	Date dateOfBirth;
 	string socialID;
-	int totalMark, finalMark, midtermMark, otherMark;
+	float totalMark = -1, finalMark = -1, midtermMark = -1, otherMark = -1;
 	Student* pNext = nullptr;
 };
 

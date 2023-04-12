@@ -55,8 +55,8 @@ Female
 1
 1 2 31 5
 1
-1
-CSC-CSC10002
+CS162
+CSC10002
 Ky thuat lap trinh
 Dinh Ba Tien
 4

@@ -4,7 +4,7 @@
 #include "account.h"
 #include "mainScreen.h"
 
-namespace UI {
+namespace CoursesManagementSystem {
 
 	using namespace System;
 	using namespace System::ComponentModel;
