@@ -1,4 +1,3 @@
-#include "ListOfStuds.h"
 #include "allStruct.h"
 
 void ExportListOfStudsInACourse(ofstream& ListOfStuds, Course* Cour){
