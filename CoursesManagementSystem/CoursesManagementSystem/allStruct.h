@@ -32,7 +32,6 @@ struct Student
 	string socialID;
 	float totalMark = -1, finalMark = -1, midtermMark = -1, otherMark = -1;
 	Student* pNext = nullptr;
-	Course* pCourseList = nullptr;
 };
 
 struct Course {
