@@ -2,6 +2,7 @@
 #include<string>
 #include"Semester.h"
 #include<fstream>
+#include<sstream>
 
 
 //semester function//////////////////////////////////////////////
@@ -85,90 +86,27 @@ void set_Semster_Data(Semester*& p_Semester, unsigned short num, int startYear, 
 	p_Semester->semester_num = num;
 	p_Semester->startYear = startYear;
 	p_Semester->endYear = endYear;
-	//split date
-	unsigned short* dateArr = new unsigned short[6];
-	std::string s = "";
-	unsigned int i = 0;
-	unsigned short idx = 0;
-	//start date
-	while (start_date[i] != '\0')
-	{
-		if (start_date[i] == ' ')
-		{
-			dateArr[idx] = stoi(s);
-			s = "";
-			idx++;
-		}
-		else {
-			s = s + start_date[i];
-		}
-		i++;
-	}
-	dateArr[idx] = stoi(s);
-	idx++;
-	//end date
-	i = 0;
-	s = "";
-	while (end_date[i] != '\0')
-	{
-		if (end_date[i] == ' ')
-		{
-			dateArr[idx] = stoi(s);
-			s = "";
-			idx++;
-		}
-		else {
-			s = s + end_date[i];
-		}
-		i++;
-	}
-	dateArr[idx] = stoi(s);
 
 
-	p_Semester->start_date.day = dateArr[0];
+	std::stringstream sDate(start_date);
+	std::string tmp;
+	getline(sDate, tmp, '/');
+	p_Semester->start_date.day = std::stoi(tmp);
+	getline(sDate, tmp, '/');
+	p_Semester->start_date.month = std::stoi(tmp);
+	getline(sDate, tmp);
+	p_Semester->start_date.year= std::stoi(tmp);
 
-	p_Semester->start_date.month = dateArr[1];
+	std::stringstream eDate(end_date);
 
-	p_Semester->start_date.year = dateArr[2];
-
-	p_Semester->end_date.day = dateArr[3];
-
-	p_Semester->end_date.month = dateArr[4];
-
-	p_Semester->end_date.year = dateArr[5];
-
-
-	delete[] dateArr;
+	getline(eDate, tmp, '/');
+	p_Semester->end_date.day = std::stoi(tmp);
+	getline(eDate, tmp, '/');
+	p_Semester->end_date.month = std::stoi(tmp);
+	getline(eDate, tmp);
+	p_Semester->end_date.year = std::stoi(tmp);
 
 
-}
-void get_All_Semester_Data(Semester* p_Semester)
-{
-	if(p_Semester == nullptr)		return;
-	while (p_Semester != nullptr)
-	{
-		std::cout << "Semester: " << p_Semester->semester_num;
-		std::cout << " \n";
-
-		std::cout << "School year: \n";
-		std::cout << "Start year: ";
-		std::cout << p_Semester->startYear;
-		std::cout << "\n";
-		
-		std::cout << "End year: ";
-		std::cout << p_Semester->endYear;
-		std::cout << "\n";
-		
-		std::cout << "Date (dd mm yyyy): \n";
-		std::cout << "Start date: " << p_Semester->start_date.day << " " << p_Semester->start_date.month << " " << p_Semester->start_date.year;
-		std::cout << " \n";
-		std::cout << "End date: " << p_Semester->end_date.day << " " << p_Semester->end_date.month << " " << p_Semester->end_date.year;
-		std::cout << " \n";
-		std::cout << "_________________________________\n";
-		get_All_Course_Data(p_Semester->p_CourseList);
-		p_Semester = p_Semester->p_Next_Semester;
-
-	}
 }
 void get_A_Semester_Data(Semester* p_Semester)
 {
@@ -182,13 +120,23 @@ void get_A_Semester_Data(Semester* p_Semester)
 	std::cout << "End year: ";
 	std::cout << p_Semester->endYear;
 	std::cout << "\n";
-	std::cout << "Date (dd mm yyyy): \n";
-	std::cout << "Start date: " << p_Semester->start_date.day << " " << p_Semester->start_date.month << " " << p_Semester->start_date.year;
+	std::cout << "Date (dd/mm/yyyy): \n";
+	std::cout << "Start date: " << p_Semester->start_date.day << "/" << p_Semester->start_date.month << "/" << p_Semester->start_date.year;
 	std::cout << " \n";
-	std::cout << "End date: " << p_Semester->end_date.day << " " << p_Semester->end_date.month << " " << p_Semester->end_date.year;
+	std::cout << "End date: " << p_Semester->end_date.day << "/" << p_Semester->end_date.month << "/" << p_Semester->end_date.year;
 	std::cout << " \n";
 	std::cout << "_________________________________\n";
 	get_All_Course_Data(p_Semester->p_CourseList);
+}
+void get_All_Semester_Data(Semester* p_Semester)
+{
+	if(p_Semester == nullptr)		return;
+	while (p_Semester != nullptr)
+	{
+		get_A_Semester_Data(p_Semester);
+		p_Semester = p_Semester->p_Next_Semester;
+
+	}
 }
 Semester* goto_Semester_numth(Semester* p_Semester, unsigned short semester_numth)
 {
@@ -324,7 +272,7 @@ void get_A_Course_Data(Course* p_Course)
 	std::cout << "Day of week: " << p_Course->dayOfWeek;
 	std::cout << "\n";
 	std::cout << "Session: " << p_Course->session;
-	std::cout << "_________________________________\n";
+	std::cout << "\n_________________________________\n";
 }
 void get_All_Course_Data(Course* p_Course)
 {
@@ -411,10 +359,10 @@ void add_Student_Data_From_File(std::string student_list, Course* p_Course, Stud
 		getline(In_Student_List, student_number[j].firstName, ',');
 		getline(In_Student_List, student_number[j].lastName, ',');
 		getline(In_Student_List, student_number[j].gender, ',');
-		getline(In_Student_List, s, ' ');
+		getline(In_Student_List, s, '/');
 		student_number[j].dateOfBirth.day = stoi(s);
 		s = "";
-		getline(In_Student_List, s, ' ');
+		getline(In_Student_List, s, '/');
 		student_number[j].dateOfBirth.month = stoi(s);
 		s = "";
 		getline(In_Student_List, s, ',');
@@ -542,8 +490,8 @@ void get_A_Student_Data(Student* p_Student_list)
 	std::cout << "Last name: " << p_Student_list->lastName << "\n";
 	std::cout << "Gender: " << p_Student_list->gender << "\n";
 	std::cout << "Date of birth: " << p_Student_list->dateOfBirth.day;
-	std::cout << " " << p_Student_list->dateOfBirth.month;
-	std::cout << " " << p_Student_list->dateOfBirth.year << "\n";
+	std::cout << "/" << p_Student_list->dateOfBirth.month;
+	std::cout << "/" << p_Student_list->dateOfBirth.year << "\n";
 	std::cout << "Social ID: " << p_Student_list->socialID << "\n";
 	if (p_Student_list->pCourseList != nullptr)
 	{

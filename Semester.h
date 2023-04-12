@@ -1,6 +1,6 @@
 #include<string>
 #include<iostream>
-
+#include<sstream>
 #ifndef SEMESTER_H
 #define SEMESTER_H
 
