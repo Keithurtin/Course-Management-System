@@ -3,7 +3,7 @@
 #include"Semester.h"
 #include<fstream>
 #include<sstream>
-
+#include"allStruct.h"
 
 //semester function//////////////////////////////////////////////
 void add_Semester(Semester*& p_Semester)
@@ -471,12 +471,22 @@ void set_Student_Data(Student*& p_Student_list)
 	getline(std::cin, p_Student_list->gender);
 	std::cout << "\n";
 	std::cout << "Date of birth \n \
-(dd mm yyyy): ";
-	std::cin >> p_Student_list->dateOfBirth.day;
-	std::cin >> p_Student_list->dateOfBirth.month;
-	std::cin >> p_Student_list->dateOfBirth.year;
+(dd/mm/yyyy): ";
+	std::string date;
+	getline(std::cin, date);
+	std::stringstream dateOfBirth(date);
+	std::string token;
+	getline(dateOfBirth, token, '/');
+	p_Student_list->dateOfBirth.day = stoi(token);
+
+	getline(dateOfBirth, token, '/');
+	p_Student_list->dateOfBirth.month = stoi(token);
+
+	getline(dateOfBirth, token, '/');
+	p_Student_list->dateOfBirth.year = stoi(token);
+
 	std::cout << "\n";
-	std::cin.ignore();
+	//std::cin.ignore();
 	std::cout << "Social ID: ";
 	getline(std::cin, p_Student_list->socialID);
 	std::cout << "\n";
