@@ -102,8 +102,9 @@ void remove_All_Student_From_Course(Course*& pCourse);
 void get_All_Student_Data(Student* p_Student_list);
 Course* goto_Course_ID(Course* pCourseList, std::string CourseID);
 Student* goto_Student_ID(Student* pStudentList, std::string StudentID);
-void save_Student_Data_To_File(Student* p_Student_list, std::string file_name);
+//void save_Student_Data_To_File(Student* p_Student_list, std::string file_name);
 void delete_All_Student(Student*& p_Student_List);
+void remove_A_Course_From_Semester(Semester*& pSemester, std::string delCourseID);
 
 #endif 
 

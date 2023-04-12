@@ -660,3 +660,17 @@ Student* goto_Student_ID(Student* pStudentList, std::string StudentID)
 	}
 	return pStudentList;
 }
+void remove_A_Course_From_Semester(Semester*& pSemester, std::string delCourseID)
+{
+	if (pSemester == nullptr) return;
+	Course* cCourse = pSemester->p_CourseList;
+	while (cCourse && cCourse->pNext && cCourse->pNext->courseID != delCourseID)
+	{
+		cCourse = cCourse->pNext;
+	}
+	if (!cCourse || !cCourse->pNext) return;
+	Course* delCourse = cCourse->pNext;
+	cCourse->pNext = delCourse->pNext;
+	remove_All_Student_From_Course(delCourse);
+	delete delCourse;
+}
