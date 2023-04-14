@@ -2,12 +2,12 @@
 #include<iostream>
 #include<sstream>
 #include"allStruct.h"
-#ifndef SEMESTER_H
-#define SEMESTER_H
+#ifndef SEMESTERH
+#define SEMESTERH
 
-struct s_Semesters;
-struct s_Courses;
-struct s_Students;
+struct s_Semester;
+struct s_Course;
+struct s_Student;
 
 struct s_Student
 {
@@ -51,40 +51,38 @@ struct s_Semester {
 };
 
 //semester prototype
-void setSemsterData(s_Semester*& pSemester);
-void setSemsterData(s_Semester*& pSemester, int num, int startYear, int endYear, std::string start_date, std::string end_date);
+void setSemesterData(s_Semester*& pSemester);
+void setSemsterData(s_Semester*& pSemester, int num, int startYear, int endYear, std::string startdate, std::string enddate);
 void addSemester(s_Semester*& pSemester);
-void addSemester(s_Semester*& pSemester, int num, int startYear, int endYear, std::string start_date, std::string end_date);
+void addSemester(s_Semester*& pSemester, int num, int startYear, int endYear, std::string startdate, std::string enddate);
 void getAllSemesterData(s_Semester* pSemester);
 void getASemesterData(s_Semester* pSemester);
-void delete_All_Semester(s_Semester*& pSemester);
-//void save_Semester_Data_To_File(s_Semester* pSemester, std::string file_name);
+void deleteAllSemester(s_Semester*& pSemester);
 
 //courses protype
-void add_Course(s_Course*& p_Course);
-void set_Course_Data(s_Course*& pCourse);
-void get_All_Course_Data(s_Course* pCourse);
-void get_A_Course_Data(s_Course* p_Course);
-void add_Course_To_Student(s_Course* p_Course_list, Student*& student);
-void remove_A_Course_From_Student(Student*& pStudent, std::string delCourseID);
-void remove_A_Student_From_Course(s_Course*& pCourse, std::string delStudentID);
-void remove_All_Course_From_Student(s_Student*& pStudent);
-void delete_All_Course(s_Course*& p_Course);
-void save_Course_Data_To_File(s_Course* p_Course, std::string file_name);
-//student prototype
-void add_Student_Data_From_File(std::string student_list, s_Course* p_Course, Student*& p_Student_list);
-void add_Student_To_Course(s_Course* p_Course, Student*& p_Student_list);
-void add_Student_To_Course(s_Course* p_Course, Student*& p_Student_list, Student& nStudent);
+void addCourse(s_Course*& pCourse);
+void setCourseData(s_Course*& pCourse);
+void getAllCourseData(s_Course* pCourse);
+void getACourseData(s_Course* pCourse);
+void addCourseToStudent(s_Course* pCourselist, s_Student*& student);
+void removeACourseFromStudent(s_Student*& pStudent, std::string delCourseID);
+void removeAStudentFromCourse(s_Course*& pCourse, std::string delStudentID);
+void removeAllCourseFromStudent(s_Student*& pStudent);
+void deleteAllCourse(s_Course*& pCourse);
 
-void set_Student_Data(Student*& student);
-void get_A_Student_Data(Student* p_Student_list);
-void remove_All_Student_From_Course(s_Course*& pCourse);
-void get_All_Student_Data(Student* p_Student_list);
-Course* goto_Course_ID(s_Course* pCourseList, std::string CourseID);
-Student* goto_Student_ID(Student* pStudentList, std::string StudentID);
-//void save_Student_Data_To_File(Student* p_Student_list, std::string file_name);
-void delete_All_Student(Student*& p_Student_List);
-void remove_A_Course_From_Semester(s_Semester*& pSemester, std::string delCourseID);
+//student prototype
+void addStudentDataFromFile(std::string studentlist, s_Course* pCourse, s_Student*& pStudentlist);
+void addStudentToCourse(s_Course* pCourse, s_Student*& pStudentlist);
+void addStudentToCourse(s_Course* pCourse, s_Student*& pStudentlist, s_Student& nStudent);
+
+void setStudentData(s_Student*& student);
+void getAStudentData(s_Student* pStudentlist);
+void removeAllStudentFromCourse(s_Course*& pCourse);
+void getAllStudentData(s_Student* pStudentlist);
+s_Course* gotoCourseID(s_Course* pCourseList, std::string CourseID);
+s_Student* gotoStudentID(s_Student* pStudentList, std::string StudentID);
+void deleteAllStudent(s_Student*& pStudentList);
+void removeACourseFromSemester(s_Semester*& pSemester, std::string delCourseID);
 
 #endif 
 
