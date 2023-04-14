@@ -82,13 +82,13 @@ void setSemsterData(s_Semester*& pSemester)
 	std::string token;
 
 	getline(sDate, token, '/');
-	pSemester->start_date.day = stoi(token);
+	pSemester->startDate.day = stoi(token);
 
 	getline(sDate, token, '/');
-	pSemester->start_date.month = stoi(token);
+	pSemester->startDate.month = stoi(token);
 
 	getline(sDate, token);
-	pSemester->start_date.year = stoi(token);
+	pSemester->startDate.year = stoi(token);
 	std::cout << "\n";
 	
 
@@ -98,13 +98,13 @@ void setSemsterData(s_Semester*& pSemester)
 	std::stringstream eDate(endDate);
 	getline(eDate, token, '/');
 	
-	pSemester->end_date.day = stoi(token);
+	pSemester->endDate.day = stoi(token);
 
 	getline(eDate, token, '/');
-	pSemester->end_date.month = stoi(token);
+	pSemester->endDate.month = stoi(token);
 
 	getline(eDate, token);
-	pSemester->end_date.year = stoi(token);
+	pSemester->endDate.year = stoi(token);
 	std::cout << endDate;
 	std::cout << "\n";
 }
@@ -118,20 +118,20 @@ void setSemsterData(s_Semester*& p_Semester, int num, int startYear, int endYear
 	std::stringstream sDate(start_date);
 	std::string token;
 	getline(sDate, token, '/');
-	p_Semester->start_date.day = std::stoi(token);
+	p_Semester->startDate.day = std::stoi(token);
 	getline(sDate, token, '/');
-	p_Semester->start_date.month = std::stoi(token);
+	p_Semester->startDate.month = std::stoi(token);
 	getline(sDate, token);
-	p_Semester->start_date.year= std::stoi(token);
+	p_Semester->startDate.year= std::stoi(token);
 
 	std::stringstream eDate(end_date);
 
 	getline(eDate, token, '/');
-	p_Semester->end_date.day = std::stoi(token);
+	p_Semester->endDate.day = std::stoi(token);
 	getline(eDate, token, '/');
-	p_Semester->end_date.month = std::stoi(token);
+	p_Semester->endDate.month = std::stoi(token);
 	getline(eDate, token);
-	p_Semester->end_date.year = std::stoi(token);
+	p_Semester->endDate.year = std::stoi(token);
 
 
 }
@@ -148,9 +148,9 @@ void getASemesterData(s_Semester* pSemester)
 	std::cout << pSemester->endYear;
 	std::cout << "\n";
 	std::cout << "Date (dd/mm/yyyy): \n";
-	std::cout << "Start date: " << pSemester->start_date.day << "/" << pSemester->start_date.month << "/" << pSemester->start_date.year;
+	std::cout << "Start date: " << pSemester->startDate.day << "/" << pSemester->startDate.month << "/" << pSemester->startDate.year;
 	std::cout << " \n";
-	std::cout << "End date: " << pSemester->end_date.day << "/" << pSemester->end_date.month << "/" << pSemester->end_date.year;
+	std::cout << "End date: " << pSemester->endDate.day << "/" << pSemester->endDate.month << "/" << pSemester->endDate.year;
 	std::cout << " \n";
 	std::cout << "_________________________________\n";
 	//getAllCourse_Data(pSemester->pCourseList);
@@ -215,11 +215,11 @@ void delete_All_Semester(s_Semester*& pSemester)
 
 
 //course funtion////////////////////////////////////////////////
-void add_Course(Course*& p_Course)
+void add_Course(s_Course*& p_Course)
 {
 	if (p_Course == nullptr)
 	{
-		Course* new_Course = new Course;
+		s_Course* new_Course = new s_Course;
 		new_Course->pNext = nullptr;
 		p_Course = new_Course;
 
@@ -229,20 +229,20 @@ void add_Course(Course*& p_Course)
 	}
 
 
-	Course* cur = p_Course;
+	s_Course* cur = p_Course;
 	while (cur->pNext != nullptr)
 	{
 		cur = cur->pNext;
 	}
 
-	Course* new_Course = new Course;
+	s_Course* new_Course = new s_Course;
 	new_Course->pNext = nullptr;
 
 	cur->pNext = new_Course;
 	set_Course_Data(new_Course);
 
 }
-void set_Course_Data(Course*& p_Course)
+void set_Course_Data(s_Course*& p_Course)
 {
 	if(p_Course == nullptr) return;
 	std::cout << "Course id: ";
@@ -305,39 +305,18 @@ void get_All_Course_Data(s_Course* pCourse)
 		pCourse = pCourse->pNext;
 	}
 }
-void delete_All_Course(Course*& p_Course)
+
+void delete_All_Course(s_Course*& p_Course)
 {
 	while (p_Course != nullptr)
 	{
-		Course* phead = p_Course->pNext;
+		s_Course* phead = p_Course->pNext;
 		delete p_Course;
 		p_Course = phead;
 	}
 }
-void save_Course_Data_To_File(Course* p_Course, std::string file_name)
-{
-	std::ofstream course;
-	course.open(file_name, std::ios::out);
-	if (course.is_open())
-	{
-		while (p_Course != nullptr)
-		{
-			course << p_Course->courseID << " ";
-			course << p_Course->courseName << " ";
-			course << p_Course->className << " ";
-			course << p_Course->teacherName << " ";
-			course << p_Course->credits << " ";
-			course << p_Course->dayOfWeek << " ";
-			course << p_Course->session << " ";
-			course << "\n";
-			p_Course = p_Course->pNext;
-		}
-	}
-	course.close();
-}
-
 //student function////////////////////////////////////////////
-void add_Student_Data_From_File(std::string student_list, Course* p_Course, Student*& p_Student_list)
+void add_Student_Data_From_File(std::string student_list, s_Course* p_Course, Student*& p_Student_list)
 {
 
 	std::ifstream In_Student_List;
@@ -405,11 +384,11 @@ void add_Student_Data_From_File(std::string student_list, Course* p_Course, Stud
 	In_Student_List.close();
 
 }
-void add_Course_To_Student(Course* p_Course_list, Student*& student)
+void add_Course_To_Student(s_Course* p_Course_list, s_Student*& student)
 {
 	if (p_Course_list == nullptr) return;
 
-	Course* nCourse = new Course;
+	s_Course* nCourse = new s_Course;
 	nCourse->pNext = nullptr;
 	*(nCourse) = *(p_Course_list);
 
@@ -419,17 +398,17 @@ void add_Course_To_Student(Course* p_Course_list, Student*& student)
 		return;
 	}
 
-	Course* cur = student->pCourseList;
+	s_Course* cur = student->pCourseList;
 	while (cur->pNext != nullptr)
 		cur = cur->pNext;
 	cur->pNext= nCourse;
 }
-void add_Student_To_Course(Course* p_Course, Student*& p_Student_list)
+void add_Student_To_Course(s_Course* p_Course, s_Student*& p_Student_list)
 {
 	if (p_Course == nullptr) return;
 	if (p_Student_list == nullptr)
 	{
-		Student* new_Student = new Student;
+		s_Student* new_Student = new s_Student;
 		new_Student->pNext = nullptr;
 		set_Student_Data(new_Student);
 		add_Course_To_Student(p_Course, new_Student);
@@ -437,13 +416,13 @@ void add_Student_To_Course(Course* p_Course, Student*& p_Student_list)
 		return;
 	}
 
-	Student* cur = p_Student_list;
+	s_Student* cur = p_Student_list;
 	while (cur->pNext != nullptr)
 	{
 		cur = cur->pNext;
 	}
 
-	Student* new_Student = new Student;
+	s_Student* new_Student = new s_Student;
 	new_Student->pNext = nullptr;
 	set_Student_Data(new_Student);
 	add_Course_To_Student(p_Course, new_Student);
@@ -551,16 +530,16 @@ void delete_All_Student(Student*& p_Student_List)
 		delete cur;
 	}
 }
-void remove_A_Course_From_Student(Student*& pStudent, std::string delCourseID)
+void remove_A_Course_From_Student(s_Student*& pStudent, std::string delCourseID)
 {
 	if (pStudent == nullptr) return;
-	Student* cStudent = pStudent;
+	s_Student* cStudent = pStudent;
 	while (cStudent && cStudent->pCourseList && cStudent->pCourseList->courseID != delCourseID)
 	{
 		cStudent = cStudent->pNext;
 	}
 	if (!cStudent || !cStudent->pCourseList) return;
-	Course* delCourse = cStudent->pCourseList;
+	s_Course* delCourse = cStudent->pCourseList;
 	cStudent->pCourseList = delCourse->pNext;
 	delete delCourse;
 }
@@ -585,19 +564,19 @@ void remove_All_Course_From_Student(Student*& pStudent)
 
 	while (pStudent->pCourseList) 
 	{
-		Course* cCourse = pStudent->pCourseList;
+		s_Course* cCourse = pStudent->pCourseList;
 		pStudent->pCourseList = pStudent->pCourseList->pNext;
 		delete cCourse;
 	}
 
 }
-void remove_All_Student_From_Course(Course*& pCourse)
+void remove_All_Student_From_Course(s_Course*& pCourse)
 {
 	if (pCourse == nullptr || pCourse->Studs == nullptr ) return;
 
 	while (pCourse->Studs) 
 	{
-		Student* cStudent = pCourse->Studs;
+		s_Student* cStudent = pCourse->Studs;
 		pCourse->Studs = pCourse->Studs->pNext;
 		remove_A_Course_From_Student(cStudent, pCourse->courseID);
 		delete cStudent;
@@ -605,22 +584,22 @@ void remove_All_Student_From_Course(Course*& pCourse)
 
 
 }
-void deleteCourse(Semester*& pSemester, std::string delCourseID)
+void deleteCourse(s_Semester*& pSemester, std::string delCourseID)
 {
 	if (pSemester == nullptr ) return;
 
-	Semester* cSemester = pSemester;
+	s_Semester* cSemester = pSemester;
 
-	while (cSemester->p_CourseList && cSemester->p_CourseList->pNext->courseID != delCourseID)
+	while (cSemester->pCourseList && cSemester->pCourseList->pNext->courseID != delCourseID)
 	{
-		cSemester->p_CourseList = cSemester->p_CourseList->pNext;
+		cSemester->pCourseList = cSemester->pCourseList->pNext;
 	}
-	if (!cSemester->p_CourseList) return;
-	Course* delCourse = cSemester->p_CourseList->pNext;
-	cSemester->p_CourseList->pNext = delCourse->pNext;
+	if (!cSemester->pCourseList) return;
+	s_Course* delCourse = cSemester->pCourseList->pNext;
+	cSemester->pCourseList->pNext = delCourse->pNext;
 	delete delCourse;
 }
-Course* goto_Course_ID(Course* pCourseList, std::string CourseID)
+s_Course* goto_Course_ID(s_Course* pCourseList, std::string CourseID)
 {
 	if (pCourseList == nullptr) return nullptr;
 	while (pCourseList && pCourseList->courseID != CourseID)
@@ -639,16 +618,16 @@ Student* goto_Student_ID(Student* pStudentList, std::string StudentID)
 	}
 	return pStudentList;
 }
-void remove_A_Course_From_Semester(Semester*& pSemester, std::string delCourseID)
+void remove_A_Course_From_Semester(s_Semester*& pSemester, std::string delCourseID)
 {
 	if (pSemester == nullptr) return;
-	Course* cCourse = pSemester->p_CourseList;
+	s_Course* cCourse = pSemester->pCourseList;
 	while (cCourse && cCourse->pNext && cCourse->pNext->courseID != delCourseID)
 	{
 		cCourse = cCourse->pNext;
 	}
 	if (!cCourse || !cCourse->pNext) return;
-	Course* delCourse = cCourse->pNext;
+	s_Course* delCourse = cCourse->pNext;
 	cCourse->pNext = delCourse->pNext;
 	remove_All_Student_From_Course(delCourse);
 	delete delCourse;

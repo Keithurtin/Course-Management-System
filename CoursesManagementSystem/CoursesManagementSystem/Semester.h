@@ -21,7 +21,7 @@ struct s_Student
 	std::string socialID;
 	int totalMark, finalMark, midtermMark, otherMark;
 	s_Student* pNext = nullptr;
-	//s_Course* pCourseList = nullptr;
+	s_Course* pCourseList = nullptr;
 
 };
 
@@ -44,7 +44,7 @@ struct s_Semester {
 
 	int No;
 	int startYear, endYear;
-	Time start_date, end_date;
+	Time startDate, endDate;
 	s_Course* pCourseList = nullptr;
 
 	s_Semester* pNextSemester = nullptr;
@@ -61,30 +61,30 @@ void delete_All_Semester(s_Semester*& pSemester);
 //void save_Semester_Data_To_File(s_Semester* pSemester, std::string file_name);
 
 //courses protype
-void add_Course(Course*& p_Course);
-void set_Course_Data(Course*& pCourse);
+void add_Course(s_Course*& p_Course);
+void set_Course_Data(s_Course*& pCourse);
 void get_All_Course_Data(s_Course* pCourse);
 void get_A_Course_Data(s_Course* p_Course);
-void add_Course_To_Student(Course* p_Course_list, Student*& student);
+void add_Course_To_Student(s_Course* p_Course_list, Student*& student);
 void remove_A_Course_From_Student(Student*& pStudent, std::string delCourseID);
-void remove_A_Student_From_Course(Course*& pCourse, std::string delStudentID);
-void remove_All_Course_From_Student(Student*& pStudent);
-void delete_All_Course(Course*& p_Course);
-void save_Course_Data_To_File(Course* p_Course, std::string file_name);
+void remove_A_Student_From_Course(s_Course*& pCourse, std::string delStudentID);
+void remove_All_Course_From_Student(s_Student*& pStudent);
+void delete_All_Course(s_Course*& p_Course);
+void save_Course_Data_To_File(s_Course* p_Course, std::string file_name);
 //student prototype
-void add_Student_Data_From_File(std::string student_list, Course* p_Course, Student*& p_Student_list);
-void add_Student_To_Course(Course* p_Course, Student*& p_Student_list);
-void add_Student_To_Course(Course* p_Course, Student*& p_Student_list, Student& nStudent);
+void add_Student_Data_From_File(std::string student_list, s_Course* p_Course, Student*& p_Student_list);
+void add_Student_To_Course(s_Course* p_Course, Student*& p_Student_list);
+void add_Student_To_Course(s_Course* p_Course, Student*& p_Student_list, Student& nStudent);
 
 void set_Student_Data(Student*& student);
 void get_A_Student_Data(Student* p_Student_list);
-void remove_All_Student_From_Course(Course*& pCourse);
+void remove_All_Student_From_Course(s_Course*& pCourse);
 void get_All_Student_Data(Student* p_Student_list);
-Course* goto_Course_ID(Course* pCourseList, std::string CourseID);
+Course* goto_Course_ID(s_Course* pCourseList, std::string CourseID);
 Student* goto_Student_ID(Student* pStudentList, std::string StudentID);
 //void save_Student_Data_To_File(Student* p_Student_list, std::string file_name);
 void delete_All_Student(Student*& p_Student_List);
-void remove_A_Course_From_Semester(Semester*& pSemester, std::string delCourseID);
+void remove_A_Course_From_Semester(s_Semester*& pSemester, std::string delCourseID);
 
 #endif 
 
