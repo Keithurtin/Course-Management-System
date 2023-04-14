@@ -1,5 +1,26 @@
 21CLC01
-0
+3
+1
+21127001
+Anh
+Nguyen Bao
+Male
+19 2 2003
+126511213
+2
+21127002
+Ngoc
+Pham Ngoc
+Female
+8 11 2003
+41111218
+3
+21127003
+Cuong
+Nguyen Quoc
+Male
+6 6 2003
+45515515
 21CLC02
 0
 21CLC03
@@ -46,7 +67,7 @@ Female
 22CLC03
 0
 22CLC04
-3
+4
 1
 21127001
 Anh
@@ -68,6 +89,13 @@ Nguyen Quoc
 Male
 6 6 2003
 45515515
+2
+22127371
+Ngo Tan
+Tai
+Male
+8 11 2004
+079564235015
 23CLC01
 1
 1
@@ -77,3 +105,5 @@ Do
 Male
 13 5 2003
 963258741
+23CLC02
+0

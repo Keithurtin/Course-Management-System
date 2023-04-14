@@ -1,0 +1,28 @@
+1
+21127001
+Anh
+Nguyen Bao
+Male
+19 2 2003
+126511213
+2
+21127003
+Cuong
+Nguyen Quoc
+Male
+6 6 2003
+45515515
+3
+21127002
+Ngoc
+Pham Ngoc
+Female
+8 11 2003
+41111218
+4
+22127371
+Tai
+Ngo Tan
+Male
+8 11 2004
+079245054687
