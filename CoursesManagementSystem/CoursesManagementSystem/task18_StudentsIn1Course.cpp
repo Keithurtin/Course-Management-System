@@ -1,6 +1,6 @@
 #include "allStruct.h"
 
-void printStudentsInCourse(string courseName, string className, SchoolYear* pHeadYear, int school_year, int semester_num)
+void printStudentsInCourse(string courseName, string courseID, SchoolYear* pHeadYear, int school_year, int semester_num)
 {
     // Find the school year node with the specified starting year
     SchoolYear* pYear = pHeadYear;
@@ -30,14 +30,14 @@ void printStudentsInCourse(string courseName, string className, SchoolYear* pHea
         return;
     }
 
-    // Find the course node with the specified course name and class name
+    // Find the course node with the specified course name and course ID
     Course* pCourse = pSemester->p_CourseList;
-    while (pCourse != nullptr && (pCourse->courseName != courseName || pCourse->className != className))
+    while (pCourse != nullptr && (pCourse->courseName != courseName || pCourse->courseID != courseID))
     {
         pCourse = pCourse->pNext;
     }
     // Print the list of students in the course
-    cout << "List of students in " << courseName << " in class " << className << " - Semester " << semester_num << " of school year " << school_year << "-" << school_year + 1 << ":" << endl;
+    cout << "List of students in " << courseName << " with courseID " << courseID << " - Semester " << semester_num << " of school year " << school_year << "-" << school_year + 1 << ":" << endl;
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
     cout << "| " << setw(5) << left << "No"
         << "| " << setw(12) << left << "Student ID"
