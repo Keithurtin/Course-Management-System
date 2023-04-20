@@ -61,3 +61,9 @@ void Input_ScoreboardOfCourse_FromFile(ifstream& Scoreboard, Course*& Cour){
     Cour->Studs = Head;
     Scoreboard.close();
 }
+
+// This function reads the scoreboard data of a course from a CSV file and assigns it to the corresponding course object.
+// It takes an ifstream object and a pointer to the course object as inputs.
+// It first counts the number of lines in the CSV file to determine the number of students in the course.
+// Then it reads the data for each student from the file and creates a linked list of student objects.
+// Finally, it assigns the head of the linked list to the corresponding course object.

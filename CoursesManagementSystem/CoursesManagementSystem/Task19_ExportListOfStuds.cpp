@@ -1,5 +1,7 @@
 #include "allStruct.h"
 
+// This function exports the list of students in a course to a CSV file.
+// It takes an output file stream and a pointer to a course as arguments.
 void ExportListOfStudsInACourse(ofstream& ListOfStuds, Course* Cour){
     ListOfStuds.open("ListOfStudents.csv");
     if(ListOfStuds.is_open() == false){
