@@ -1,10 +1,12 @@
 #include "allStruct.h"
 
 void updateStuResult(Course*& Cour){
+    // Ask for student ID to update their score
     string final = "", midterm = "", other = "", total = "";
     string stuID = "";
     cout << "Student ID: ";
     getline(cin, stuID, '\n');
+    // Search for student in the list and update their score
     bool found = false;
     Student* Stu = Cour->Studs;
     while (Stu != nullptr) {
@@ -27,6 +29,7 @@ void updateStuResult(Course*& Cour){
         }
         Stu = Stu->pNext;
     }
+    // If student ID is not found in the list, print an error message
     if(!found) cout << "Student ID not found, please try again." << endl;
     return;
 }
