@@ -100,7 +100,7 @@ StudentList* takeStudentList(StudentList* sList, string ID)
 	return sList;
 }
 
-void readCourseStudent(Course*& curCourse, StudentList* &sList, string filename)
+void readCourseStudent(Course*& curCourse, StudentList*& sList, string filename)
 {
 	ifstream fin(filename);
 	curCourse->Studs = new Student;
@@ -109,12 +109,72 @@ void readCourseStudent(Course*& curCourse, StudentList* &sList, string filename)
 	StudentList* curSList = sList;
 	while (curStud)
 	{
-		curSList = takeStudentList(sList, curStud->studentID);	
-		curSList->course = curCourse;
+		curSList = takeStudentList(sList, curStud->studentID);
+		if (!curSList->course)
+		{
+			curSList->course = new Course;
+			curSList->course->courseID = curCourse->courseID;
+			curSList->course->courseName = curCourse->courseName;
+			curSList->course->className = curCourse->className;
+			curSList->course->credits = curCourse->credits;
+			curSList->course->teacherName = curCourse->teacherName;
+			curSList->course->maxStudents = curCourse->maxStudents;
+			curSList->course->dayOfWeek = curCourse->dayOfWeek;
+			curSList->course->session = curCourse->session;
+			curSList->course->Studs = curCourse->Studs;
+		}
+		else
+		{
+			Course* curSCourse = curSList->course;
+			while (curSCourse->pNext) curSCourse = curSCourse->pNext;
+			curSCourse->pNext = new Course;
+			curSCourse = curSCourse->pNext;
+			curSCourse->courseID = curCourse->courseID;
+			curSCourse->courseName = curCourse->courseName;
+			curSCourse->className = curCourse->className;
+			curSCourse->credits = curCourse->credits;
+			curSCourse->teacherName = curCourse->teacherName;
+			curSCourse->maxStudents = curCourse->maxStudents;
+			curSCourse->dayOfWeek = curCourse->dayOfWeek;
+			curSCourse->session = curCourse->session;
+			curSCourse->Studs = curCourse->Studs;
+		}
+
+
 		curStud = curStud->pNext;
 	}
 	fin.close();
 }
+
+/*void readCourseStudent(Course*& curCourse, StudentList*& sList, string filename)
+{
+	ifstream fin(filename);
+	curCourse->Studs = new Student;
+	readStudent(curCourse->Studs, curCourse->curStudent, fin);
+	Student* curStud = curCourse->Studs;
+	StudentList* curSList = sList;
+	while (curStud)
+	{
+		curSList = takeStudentList(sList, curStud->studentID);
+		if (!curSList->course)
+		{
+			curSList->course = new Course;
+			curSList->course->courseID = curCourse->courseID;
+		}
+		else
+		{
+			Course* curSCourse = curSList->course;
+			while (curSCourse->pNext) curSCourse = curSCourse->pNext;
+			curSCourse->pNext = new Course;
+			curSCourse = curSCourse->pNext;
+			curSCourse->courseID = curCourse->courseID;
+		}
+
+
+		curStud = curStud->pNext;
+	}
+	fin.close();
+}*/
 
 void readCourse(Course*& courseList, int n, StudentList* &sList, ifstream &fin)
 {

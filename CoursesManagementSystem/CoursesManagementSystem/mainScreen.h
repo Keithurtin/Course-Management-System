@@ -5731,7 +5731,7 @@ private: System::Windows::Forms::Label^ label51;
 			return true;
 		}
 
-	private: 
+	/*private:
 		System::Void button18_Click(System::Object^ sender, System::EventArgs^ e) {
 			if (!checkStudentViewCourse()) return;
 
@@ -5742,6 +5742,34 @@ private: System::Windows::Forms::Label^ label51;
 			while (curCourse) {
 				if (!takeCourse(oneSemester->p_CourseList, curCourse->courseID)) {
 					curCourse = curCourse->pNext;
+					continue;
+				}
+
+				ListViewItem^ item = gcnew ListViewItem(convertString(curCourse->courseID));
+				item->SubItems->Add(convertString(curCourse->courseName));
+				item->SubItems->Add(convertString(curCourse->className));
+				item->SubItems->Add(convertString(curCourse->teacherName));
+				item->SubItems->Add(intToString(curCourse->credits));
+				item->SubItems->Add(convertString(curCourse->dayOfWeek));
+				item->SubItems->Add(convertString(curCourse->session));
+				studentListViewCourse->Items->Add(item);
+				curCourse = curCourse->pNext;
+			}
+		}*/
+
+	private:
+		System::Void button18_Click(System::Object^ sender, System::EventArgs^ e) {
+			if (!checkStudentViewCourse()) return;
+
+			studentListViewCourse->Items->Clear();
+			string ID = curAccount->StudentID;
+			StudentList* curStud = takeStudentList(sList, ID);
+			Course* curSCourse = curStud->course;
+			Course* curCourse;
+			while (curSCourse) {
+				curCourse = takeCourse(oneSemester->p_CourseList, curSCourse->courseID);
+				if (!curCourse) {
+					curSCourse = curSCourse->pNext;
 					continue;
 				}
 
